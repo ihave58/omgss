@@ -1,6 +1,6 @@
 <?php
     include_once('../../include/db.php');
-
+    require("../../include/utils.php");
 
     if (empty($_POST['appid'])) {
         echo $response = json_encode(array('status' => 'error', 'message' => "Appid Can't be Empty"));
@@ -10,8 +10,8 @@
         echo $response = json_encode(array('status' => 'error', 'message' => "Token Can't be Empty"));
         exit;
     } else {
-        $urlid = $_POST['appid'];
-        $urltoken = $_POST['token'];
+        $urlid = runUserInputSanitizationHook($_POST['appid']);
+        $urltoken = runUserInputSanitizationHook($_POST['token']);
 
         $sql1 = "SELECT id FROM 003_omgss_api_tokens WHERE app_id='" . $urlid . "' AND app_token='" . $urltoken . "'";
         $results = mysqli_query($conn, $sql1);
@@ -32,14 +32,14 @@
     $method = $_SERVER['REQUEST_METHOD'];
 
     if ($method == 'POST') {
-        $fullname = (isset($_POST['fullname'])) ? $_POST['fullname'] : '';
-        $email = (isset($_POST['email'])) ? $_POST['email'] : '';
-        $phone = (isset($_POST['phone'])) ? $_POST['phone'] : '';
-        $address = (isset($_POST['address'])) ? $_POST['address'] : '';
-        $experience = (isset($_POST['experience'])) ? $_POST['experience'] : '';
-        $prevsalary = (isset($_POST['prevsalary'])) ? $_POST['prevsalary'] : '';
-        $expsalary = (isset($_POST['expsalary'])) ? $_POST['expsalary'] : '';
-        $comments = (isset($_POST['comments'])) ? $_POST['comments'] : '';
+        $fullname = (isset($_POST['fullname'])) ? runUserInputSanitizationHook($_POST['fullname']) : '';
+        $email = (isset($_POST['email'])) ? runUserInputSanitizationHook($_POST['email']) : '';
+        $phone = (isset($_POST['phone'])) ? runUserInputSanitizationHook($_POST['phone']) : '';
+        $address = (isset($_POST['address'])) ? runUserInputSanitizationHook($_POST['address']) : '';
+        $experience = (isset($_POST['experience'])) ? runUserInputSanitizationHook($_POST['experience']) : '';
+        $prevsalary = (isset($_POST['prevsalary'])) ? runUserInputSanitizationHook($_POST['prevsalary']) : '';
+        $expsalary = (isset($_POST['expsalary'])) ? runUserInputSanitizationHook($_POST['expsalary']) : '';
+        $comments = (isset($_POST['comments'])) ? runUserInputSanitizationHook($_POST['comments']) : '';
 
 
         if (empty($fullname) || empty($email) || empty($phone) || empty($address) || empty($experience) || empty($prevsalary) || empty($expsalary) || empty($comments)) {

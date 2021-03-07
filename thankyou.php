@@ -1,12 +1,12 @@
 <?php
-include('header.php');
-if ($_SESSION["sessid"] == "") {
-    echo '<script>window.location.href="index.php";</script>';
-}
+    include('header.php');
+    if ($_SESSION["sessid"] == "") {
+        echo '<script>window.location.href="index.php";</script>';
+    }
 ?>
 <?php
 
-$EmailBody = '<table border="0" cellpadding="0" cellspacing="10" height="100%" bgcolor="#FFFFFF" width="100%" style="max-width: 650px;" id="bodyTable">
+    $EmailBody = '<table border="0" cellpadding="0" cellspacing="10" height="100%" bgcolor="#FFFFFF" width="100%" style="max-width: 650px;" id="bodyTable">
 
           <tr>
 
@@ -84,21 +84,21 @@ $EmailBody = '<table border="0" cellpadding="0" cellspacing="10" height="100%" b
           </tr>
 
       </table>';
-$subject = "A new Order Has Been Placed";
-$alertmessage1 = "Message Sent";
-$alertmessage2 = "";
-$resultpdf = sendemail($companyEmail, "noreply@omgss.in", $subject, $EmailBody, $alertmessage1, $alertmessage2, "No");
-if ($_SESSION['paytype'] == "prep") {
-    if ($_SESSION['paymentstatus'] == "Successful") {
-        $odid = $_SESSION['lastid'];
-        $razorpayid = $_SESSION['razorpay_payment_id'];
-        mysqli_query($conn, "UPDATE `005_omgss_orders` SET `status`='Success',`razorpayid`='$razorpayid' WHERE `id`='$odid'");
-        mysqli_query($conn, "DELETE FROM `005_omgss_cart` WHERE `ip`='$ip' OR `userid`='$loggeduserid'");
-        $messnoti = "Your Order OMGORD" . $_SESSION['lastid'] . " has been received by us";
-        mysqli_query($conn, "INSERT INTO `005_omgss_usernotifications`(`userid`,`image`,`content`)VALUES('$loggeduserid','pass.png','$messnoti')");
+    $subject = "A new Order Has Been Placed";
+    $alertmessage1 = "Message Sent";
+    $alertmessage2 = "";
+    $resultpdf = sendemail($companyEmail, "noreply@omgss.in", $subject, $EmailBody, $alertmessage1, $alertmessage2, "No");
+    if ($_SESSION['paytype'] == "prep") {
+        if ($_SESSION['paymentstatus'] == "Successful") {
+            $odid = $_SESSION['lastid'];
+            $razorpayid = $_SESSION['razorpay_payment_id'];
+            mysqli_query($conn, "UPDATE `005_omgss_orders` SET `status`='Success',`razorpayid`='$razorpayid' WHERE `id`='$odid'");
+            mysqli_query($conn, "DELETE FROM `005_omgss_cart` WHERE `ip`='$ip' OR `userid`='$loggeduserid'");
+            $messnoti = "Your Order OMGORD" . $_SESSION['lastid'] . " has been received by us";
+            mysqli_query($conn, "INSERT INTO `005_omgss_usernotifications`(`userid`,`image`,`content`)VALUES('$loggeduserid','pass.png','$messnoti')");
 
+        }
     }
-}
 
 ?>
 
@@ -192,9 +192,9 @@ if ($_SESSION['paytype'] == "prep") {
 
 
 <?php
-$_SESSION['coupidfrsv'] = "";
-$_SESSION['coupdisc'] = "";
-$_SESSION['disccouptypesh'] = "";
-$_SESSION['totalvalue'] = "";
-include('footer.php');
+    $_SESSION['coupidfrsv'] = "";
+    $_SESSION['coupdisc'] = "";
+    $_SESSION['disccouptypesh'] = "";
+    $_SESSION['totalvalue'] = "";
+    include('footer.php');
 ?>

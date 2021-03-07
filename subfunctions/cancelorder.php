@@ -1,24 +1,24 @@
 <?php
-session_start();
-$loggeduserid = $_SESSION["sessid"];
-include('../include/db.php');
-require('../razorpay/config.php');
-require('../razorpay/razorpay-php/Razorpay.php');
+    session_start();
+    $loggeduserid = $_SESSION["sessid"];
+    include('../include/db.php');
+    require('../razorpay/config.php');
+    require('../razorpay/razorpay-php/Razorpay.php');
 
-use Razorpay\Api\Api;
+    use Razorpay\Api\Api;
 
-$id = $_GET['id'];
+    $id = runUserInputSanitizationHook($_GET['id']);
 
-$sql = "SELECT * FROM `005_omgss_orders` WHERE `id`='$id'";
-$res = mysqli_query($conn, $sql);
-$row = mysqli_fetch_assoc($res);
+    $sql = "SELECT * FROM `005_omgss_orders` WHERE `id`='$id'";
+    $res = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($res);
 
-if ($row['userid'] != $loggeduserid) {
-    echo '<script>window.location.href="../index.php";</script>';
-    die;
-} else {
-    if (($row['orderstate'] == "Delivered") || ($row['orderstate'] == "Cancelled")) {
-        echo '<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    if ($row['userid'] != $loggeduserid) {
+        echo '<script>window.location.href="../index.php";</script>';
+        die;
+    } else {
+        if (($row['orderstate'] == "Delivered") || ($row['orderstate'] == "Cancelled")) {
+            echo '<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	            
 	                      <link href="http://tristanedwards.me/u/SweetAlert/lib/sweet-alert.css" rel="stylesheet" />
 
@@ -46,11 +46,11 @@ if ($row['userid'] != $loggeduserid) {
 	                   
 	                  </script>
 	                    ';
-        die;
-    } else {
-        if ($row['paymenttype'] == "cos") {
-            mysqli_query($conn, "UPDATE `005_omgss_orders` SET `orderstate`='Cancelled' WHERE `id`='$id'");
-            $message = '<table border="0" cellpadding="0" cellspacing="10" height="100%" bgcolor="#FFFFFF" width="100%" style="max-width: 650px;" id="bodyTable">
+            die;
+        } else {
+            if ($row['paymenttype'] == "cos") {
+                mysqli_query($conn, "UPDATE `005_omgss_orders` SET `orderstate`='Cancelled' WHERE `id`='$id'");
+                $message = '<table border="0" cellpadding="0" cellspacing="10" height="100%" bgcolor="#FFFFFF" width="100%" style="max-width: 650px;" id="bodyTable">
 
 		          <tr>
 
@@ -126,26 +126,26 @@ if ($row['userid'] != $loggeduserid) {
 		          </tr>
 
 		      </table>';
-            $sqlce = "SELECT * FROM `005_omgss_companydetails` WHERE `id`=1";
-            $resce = mysqli_query($conn, $sqlce);
-            $rowce = mysqli_fetch_assoc($resce);
+                $sqlce = "SELECT * FROM `005_omgss_companydetails` WHERE `id`=1";
+                $resce = mysqli_query($conn, $sqlce);
+                $rowce = mysqli_fetch_assoc($resce);
 
-            $to = $rowce['companyemail'];
-            $subject = "Order OMGORD" . $id . " Cancelled as per your request.";
-            $txt = $message;
+                $to = $rowce['companyemail'];
+                $subject = "Order OMGORD" . $id . " Cancelled as per your request.";
+                $txt = $message;
 
-            $headers = 'From: noreply@omgss.in' . "\r\n";
-            $headers .= "MIME-Version: 1.0" . "\r\n";
-            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                $headers = 'From: noreply@omgss.in' . "\r\n";
+                $headers .= "MIME-Version: 1.0" . "\r\n";
+                $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 
-            $result = mail($to, $subject, $txt, $headers);
-        } else if ($row['paymenttype'] == "prep") {
-            $paymentid = $row['razorpayid'];
-            try {
-                $api = new Api($keyId, $keySecret);
-                $refund = $api->refund->create(array('payment_id' => $paymentid));
-            } catch (Exception $e) {
-                echo '<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+                $result = mail($to, $subject, $txt, $headers);
+            } else if ($row['paymenttype'] == "prep") {
+                $paymentid = $row['razorpayid'];
+                try {
+                    $api = new Api($keyId, $keySecret);
+                    $refund = $api->refund->create(array('payment_id' => $paymentid));
+                } catch (Exception $e) {
+                    echo '<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	            
 	                      <link href="http://tristanedwards.me/u/SweetAlert/lib/sweet-alert.css" rel="stylesheet" />
 
@@ -173,14 +173,14 @@ if ($row['userid'] != $loggeduserid) {
 	                   
 	                  </script>
 	                    ';
-                die;
-            }
-            $razorpayOrderId = $refund['id'];
-            $razorpayamount = $refund['amount'] / 100;
-            if ($razorpayOrderId) {
-                mysqli_query($conn, "UPDATE `005_omgss_orders` SET `orderstate`='Cancelled',`refundid`='$razorpayOrderId' WHERE `id`='$id'");
+                    die;
+                }
+                $razorpayOrderId = $refund['id'];
+                $razorpayamount = $refund['amount'] / 100;
+                if ($razorpayOrderId) {
+                    mysqli_query($conn, "UPDATE `005_omgss_orders` SET `orderstate`='Cancelled',`refundid`='$razorpayOrderId' WHERE `id`='$id'");
 
-                $message = '<table border="0" cellpadding="0" cellspacing="10" height="100%" bgcolor="#FFFFFF" width="100%" style="max-width: 650px;" id="bodyTable">
+                    $message = '<table border="0" cellpadding="0" cellspacing="10" height="100%" bgcolor="#FFFFFF" width="100%" style="max-width: 650px;" id="bodyTable">
 
 		          <tr>
 
@@ -256,23 +256,23 @@ if ($row['userid'] != $loggeduserid) {
 		          </tr>
 
 		      </table>';
-                $sqlce = "SELECT * FROM `005_omgss_companydetails` WHERE `id`=1";
-                $resce = mysqli_query($conn, $sqlce);
-                $rowce = mysqli_fetch_assoc($resce);
+                    $sqlce = "SELECT * FROM `005_omgss_companydetails` WHERE `id`=1";
+                    $resce = mysqli_query($conn, $sqlce);
+                    $rowce = mysqli_fetch_assoc($resce);
 
-                $to = $rowce['companyemail'];
-                $subject = "Order OMGORD" . $id . " Cancelled as per your request.";
-                $txt = $message;
+                    $to = $rowce['companyemail'];
+                    $subject = "Order OMGORD" . $id . " Cancelled as per your request.";
+                    $txt = $message;
 
-                $headers = 'From: noreply@omgss.in' . "\r\n";
-                $headers .= "MIME-Version: 1.0" . "\r\n";
-                $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                    $headers = 'From: noreply@omgss.in' . "\r\n";
+                    $headers .= "MIME-Version: 1.0" . "\r\n";
+                    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 
-                $result = mail($to, $subject, $txt, $headers);
+                    $result = mail($to, $subject, $txt, $headers);
 
 
-            } else {
-                echo '<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+                } else {
+                    echo '<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	            
 	                      <link href="http://tristanedwards.me/u/SweetAlert/lib/sweet-alert.css" rel="stylesheet" />
 
@@ -300,16 +300,16 @@ if ($row['userid'] != $loggeduserid) {
 	                   
 	                  </script>
 	                    ';
-                die;
+                    die;
+                }
+
+
             }
-
-
         }
+
     }
 
-}
 
-
-header("Location: ../myorders.php");
+    header("Location: ../myorders.php");
 
 ?>

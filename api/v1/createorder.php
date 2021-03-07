@@ -1,6 +1,6 @@
 <?php
     include_once('../../include/db.php');
-
+    require("../../include/utils.php");
 
     if (empty($_POST['appid'])) {
         echo $response = json_encode(array('status' => 'error', 'message' => "Appid Can't be Empty"));
@@ -10,8 +10,8 @@
         echo $response = json_encode(array('status' => 'error', 'message' => "Token Can't be Empty"));
         exit;
     } else {
-        $urlid = $_POST['appid'];
-        $urltoken = $_POST['token'];
+        $urlid = runUserInputSanitizationHook($_POST['appid']);
+        $urltoken = runUserInputSanitizationHook($_POST['token']);
 
         $sql1 = "SELECT id FROM 003_omgss_api_tokens WHERE app_id='" . $urlid . "' AND app_token='" . $urltoken . "'";
         $results = mysqli_query($conn, $sql1);
@@ -33,22 +33,22 @@
 
     if ($method == 'POST') {
 
-        $userid = (isset($_POST['userid'])) ? $_POST['userid'] : '';
-        $orderdetails = (isset($_POST['orderdetails'])) ? $_POST['orderdetails'] : '';
-        $fullname = (isset($_POST['fullname'])) ? $_POST['fullname'] : '';
-        $email = (isset($_POST['email'])) ? $_POST['email'] : '';
-        $address = (isset($_POST['address'])) ? $_POST['address'] : '';
-        $city = (isset($_POST['city'])) ? $_POST['city'] : '';
-        $state = (isset($_POST['state'])) ? $_POST['state'] : '';
-        $zip = (isset($_POST['zip'])) ? $_POST['zip'] : '';
-        $paymenttype = (isset($_POST['paymenttype'])) ? $_POST['paymenttype'] : '';
-        $totalordervalue = (isset($_POST['totalordervalue'])) ? $_POST['totalordervalue'] : '';
-        $discount = (isset($_POST['discount'])) ? $_POST['discount'] : '';
+        $userid = (isset($_POST['userid'])) ? runUserInputSanitizationHook($_POST['userid']) : '';
+        $orderdetails = (isset($_POST['orderdetails'])) ? runUserInputSanitizationHook($_POST['orderdetails']) : '';
+        $fullname = (isset($_POST['fullname'])) ? runUserInputSanitizationHook($_POST['fullname']) : '';
+        $email = (isset($_POST['email'])) ? runUserInputSanitizationHook($_POST['email']) : '';
+        $address = (isset($_POST['address'])) ? runUserInputSanitizationHook($_POST['address']) : '';
+        $city = (isset($_POST['city'])) ? runUserInputSanitizationHook($_POST['city']) : '';
+        $state = (isset($_POST['state'])) ? runUserInputSanitizationHook($_POST['state']) : '';
+        $zip = (isset($_POST['zip'])) ? runUserInputSanitizationHook($_POST['zip']) : '';
+        $paymenttype = (isset($_POST['paymenttype'])) ? runUserInputSanitizationHook($_POST['paymenttype']) : '';
+        $totalordervalue = (isset($_POST['totalordervalue'])) ? runUserInputSanitizationHook($_POST['totalordervalue']) : '';
+        $discount = (isset($_POST['discount'])) ? runUserInputSanitizationHook($_POST['discount']) : '';
         $status = "Success";
 
-        $razorpayid = (isset($_POST['razorpayid'])) ? $_POST['razorpayid'] : '';
-        $couponcode = (isset($_POST['couponcode'])) ? $_POST['couponcode'] : '';
-        $coupondetails = (isset($_POST['coupondetails'])) ? $_POST['coupondetails'] : '';
+        $razorpayid = (isset($_POST['razorpayid'])) ? runUserInputSanitizationHook($_POST['razorpayid']) : '';
+        $couponcode = (isset($_POST['couponcode'])) ? runUserInputSanitizationHook($_POST['couponcode']) : '';
+        $coupondetails = (isset($_POST['coupondetails'])) ? runUserInputSanitizationHook($_POST['coupondetails']) : '';
         $dateind = date("Y-m-d") . " " . date("h:i:sa");
         $ip = $_SERVER['REMOTE_ADDR'];
 

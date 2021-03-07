@@ -1,6 +1,6 @@
 <?php
-include('header.php');
-include('sidebar.php');
+    include('header.php');
+    include('sidebar.php');
 ?>
 
 
@@ -94,5 +94,5 @@ include('sidebar.php');
 
 
 <?php
-include('footer.php');
+    include('footer.php');
 ?>

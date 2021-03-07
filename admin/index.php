@@ -1,9 +1,9 @@
 <?php
-header("Cache-Control: no-cache, must-revalidate");
-session_start();
-include('../include/db.php');
-include('../include/functions.php');
-include('../include/keys.php');
+    header("Cache-Control: no-cache, must-revalidate");
+    session_start();
+    include('../include/db.php');
+    include('../include/functions.php');
+    include('../include/keys.php');
 ?>
 
 <!DOCTYPE html>

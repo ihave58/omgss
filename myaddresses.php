@@ -1,8 +1,8 @@
 <?php
-include('header.php');
-if ($_SESSION["sessid"] == "") {
-    echo '<script>window.location.href="index.php";</script>';
-}
+    include('header.php');
+    if ($_SESSION["sessid"] == "") {
+        echo '<script>window.location.href="index.php";</script>';
+    }
 ?>
 
     <link rel="stylesheet" href="css/w3.css">
@@ -11,11 +11,11 @@ if ($_SESSION["sessid"] == "") {
          style="width:217px; background: #0071ff;    color: white !important;     padding-top: 35px;" id="mySidebar">
         <button class="w3-bar-item w3-button w3-large w3-hide-large" onclick="w3_close()">Close &times;</button>
         <?php
-        include('sidebar.php');
+            include('sidebar.php');
         ?>
     </div>
 <?php
-include('datatables.php');
+    include('datatables.php');
 ?>
     <div class="w3-main" style="margin-left:200px; "><!--  height: 500px !important; -->
         <div class="w3-teal" style="background-color: #f79f24!important;">
@@ -42,58 +42,58 @@ include('datatables.php');
 
 
                                 <?php
-                                if ($countbilladd > 0) {
-                                    ?>
-                                    <table class="table table-striped table-bordered table-hover"
-                                           id="dataTables-example">
-                                        <thead>
-                                        <th>Sl.</th>
-                                        <th>Address Profile Name</th>
-                                        <th>Full Name</th>
-                                        <th>Email</th>
-                                        <th>Address</th>
-                                        <th>City</th>
-                                        <th>State</th>
-                                        <th>Zip</th>
-                                        <th>Edit</th>
-                                        <th>Delete</th>
-                                        </thead>
-                                        <tbody>
-
-                                        <?php
-                                        $counterbadd = 0;
-                                        while ($rowbilladd = mysqli_fetch_assoc($resbilladd)) {
-                                            $counterbadd++;
-                                            ?>
-                                            <tr>
-                                                <td><?php echo $counterbadd; ?></td>
-                                                <td><?php echo $rowbilladd['addressprofilename']; ?></td>
-                                                <td><?php echo $rowbilladd['fullname']; ?></td>
-                                                <td><?php echo $rowbilladd['Email']; ?></td>
-                                                <td><?php echo $rowbilladd['Address']; ?></td>
-                                                <td><?php echo $rowbilladd['City']; ?></td>
-                                                <td><?php echo $rowbilladd['State']; ?></td>
-                                                <td><?php echo $rowbilladd['Zip']; ?></td>
-                                                <td style="text-align:center"><a
-                                                            href="addaddress.php?badd=<?php echo $rowbilladd['id'] ?>&typebadd=edit"><i
-                                                                class="fa fa-edit" style="color:green"
-                                                                aria-hidden="true"></i></a></td>
-                                                <td style="text-align:center"><a
-                                                            href="subfunctions/delbadd.php?id=<?php echo $rowbilladd['id'] ?>"
-                                                            onclick="return confirm('Are you sure you want to delete this item?');"><i
-                                                                class="fa fa-window-close" style="color:red"
-                                                                aria-hidden="true"></i></a></td>
-                                            </tr>
-                                            <?php
-                                        }
+                                    if ($countbilladd > 0) {
                                         ?>
+                                        <table class="table table-striped table-bordered table-hover"
+                                               id="dataTables-example">
+                                            <thead>
+                                            <th>Sl.</th>
+                                            <th>Address Profile Name</th>
+                                            <th>Full Name</th>
+                                            <th>Email</th>
+                                            <th>Address</th>
+                                            <th>City</th>
+                                            <th>State</th>
+                                            <th>Zip</th>
+                                            <th>Edit</th>
+                                            <th>Delete</th>
+                                            </thead>
+                                            <tbody>
 
-                                        </tbody>
-                                    </table>
-                                    <?php
-                                } else {
-                                    echo '<p>No Address Found</p>';
-                                }
+                                            <?php
+                                                $counterbadd = 0;
+                                                while ($rowbilladd = mysqli_fetch_assoc($resbilladd)) {
+                                                    $counterbadd++;
+                                                    ?>
+                                                    <tr>
+                                                        <td><?php echo $counterbadd; ?></td>
+                                                        <td><?php echo $rowbilladd['addressprofilename']; ?></td>
+                                                        <td><?php echo $rowbilladd['fullname']; ?></td>
+                                                        <td><?php echo $rowbilladd['Email']; ?></td>
+                                                        <td><?php echo $rowbilladd['Address']; ?></td>
+                                                        <td><?php echo $rowbilladd['City']; ?></td>
+                                                        <td><?php echo $rowbilladd['State']; ?></td>
+                                                        <td><?php echo $rowbilladd['Zip']; ?></td>
+                                                        <td style="text-align:center"><a
+                                                                    href="addaddress.php?badd=<?php echo $rowbilladd['id'] ?>&typebadd=edit"><i
+                                                                        class="fa fa-edit" style="color:green"
+                                                                        aria-hidden="true"></i></a></td>
+                                                        <td style="text-align:center"><a
+                                                                    href="subfunctions/delbadd.php?id=<?php echo $rowbilladd['id'] ?>"
+                                                                    onclick="return confirm('Are you sure you want to delete this item?');"><i
+                                                                        class="fa fa-window-close" style="color:red"
+                                                                        aria-hidden="true"></i></a></td>
+                                                    </tr>
+                                                    <?php
+                                                }
+                                            ?>
+
+                                            </tbody>
+                                        </table>
+                                        <?php
+                                    } else {
+                                        echo '<p>No Address Found</p>';
+                                    }
                                 ?>
 
 
@@ -131,5 +131,5 @@ include('datatables.php');
     </script>
 
 <?php
-include('footer.php');
+    include('footer.php');
 ?>

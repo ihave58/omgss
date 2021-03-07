@@ -1,9 +1,9 @@
 <?php
-include('../../include/db.php');
-$id = $_GET['id'];
+    include('../../include/db.php');
+    $id = runUserInputSanitizationHook($_GET['id']);
 
-mysqli_query($conn, "DELETE FROM `005_omgss_products` WHERE `id`='$id'");
+    mysqli_query($conn, "DELETE FROM `005_omgss_products` WHERE `id`='$id'");
 
-header("Location: ../products.php");
+    header("Location: ../products.php");
 
 ?>

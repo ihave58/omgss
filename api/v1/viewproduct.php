@@ -1,6 +1,6 @@
 <?php
     include_once('../../include/db.php');
-
+    require("../../include/utils.php");
 
     if (empty($_POST['appid'])) {
         echo $response = json_encode(array('status' => 'error', 'message' => "Appid Can't be Empty"));
@@ -10,8 +10,8 @@
         echo $response = json_encode(array('status' => 'error', 'message' => "Token Can't be Empty"));
         exit;
     } else {
-        $urlid = $_POST['appid'];
-        $urltoken = $_POST['token'];
+        $urlid = runUserInputSanitizationHook($_POST['appid']);
+        $urltoken = runUserInputSanitizationHook($_POST['token']);
 
         $sql1 = "SELECT id FROM 003_omgss_api_tokens WHERE app_id='" . $urlid . "' AND app_token='" . $urltoken . "'";
         $results = mysqli_query($conn, $sql1);
@@ -32,7 +32,7 @@
     $method = $_SERVER['REQUEST_METHOD'];
 
     if ($method == 'POST') {
-        $productid = (isset($_POST['productid'])) ? $_POST['productid'] : '';
+        $productid = (isset($_POST['productid'])) ? runUserInputSanitizationHook($_POST['productid']) : '';
 
 
         if (empty($productid)) {

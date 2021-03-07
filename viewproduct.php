@@ -1,30 +1,30 @@
 <?php
-include('header.php');
+    include('header.php');
 ?>
 <?php
-$crtchkproductid = $rowviewprod['id'];
-if ($_SESSION["sessid"] == "") {
+    $crtchkproductid = $rowviewprod['id'];
+    if ($_SESSION["sessid"] == "") {
 
-    $sqlcrtchk = "SELECT * FROM `005_omgss_cart` WHERE `prdid`='$crtchkproductid' AND `ip`='$ip'";
-} else {
-    $useridcartchk = $_SESSION["sessid"];
-    $sqlcrtchk = "SELECT * FROM `005_omgss_cart` WHERE `prdid`='$crtchkproductid' AND (`userid`='$useridcartchk' OR `ip`='$ip')";
-}
-$rescrtchk = mysqli_query($conn, $sqlcrtchk);
-$countcrtchk = mysqli_num_rows($rescrtchk);
-$rowcrtchk = mysqli_fetch_assoc($rescrtchk);
-$qntycartchk = $rowcrtchk['quantity'];
-$idcartchk = $rowcrtchk['id'];
+        $sqlcrtchk = "SELECT * FROM `005_omgss_cart` WHERE `prdid`='$crtchkproductid' AND `ip`='$ip'";
+    } else {
+        $useridcartchk = $_SESSION["sessid"];
+        $sqlcrtchk = "SELECT * FROM `005_omgss_cart` WHERE `prdid`='$crtchkproductid' AND (`userid`='$useridcartchk' OR `ip`='$ip')";
+    }
+    $rescrtchk = mysqli_query($conn, $sqlcrtchk);
+    $countcrtchk = mysqli_num_rows($rescrtchk);
+    $rowcrtchk = mysqli_fetch_assoc($rescrtchk);
+    $qntycartchk = $rowcrtchk['quantity'];
+    $idcartchk = $rowcrtchk['id'];
 
-if ($_SESSION["sessid"] == "") {
+    if ($_SESSION["sessid"] == "") {
 
-    $sqlwishchk = "SELECT * FROM `005_omgss_wishlist` WHERE `prdid`='$crtchkproductid' AND `ip`='$ip'";
-} else {
-    $useridwishchk = $_SESSION["sessid"];
-    $sqlwishchk = "SELECT * FROM `005_omgss_wishlist` WHERE `prdid`='$crtchkproductid' AND (`userid`='$useridwishchk' OR `ip`='$ip')";
-}
-$reswishchk = mysqli_query($conn, $sqlwishchk);
-$countwishchk = mysqli_num_rows($reswishchk);
+        $sqlwishchk = "SELECT * FROM `005_omgss_wishlist` WHERE `prdid`='$crtchkproductid' AND `ip`='$ip'";
+    } else {
+        $useridwishchk = $_SESSION["sessid"];
+        $sqlwishchk = "SELECT * FROM `005_omgss_wishlist` WHERE `prdid`='$crtchkproductid' AND (`userid`='$useridwishchk' OR `ip`='$ip')";
+    }
+    $reswishchk = mysqli_query($conn, $sqlwishchk);
+    $countwishchk = mysqli_num_rows($reswishchk);
 
 ?>
     <style>
@@ -111,79 +111,79 @@ $countwishchk = mysqli_num_rows($reswishchk);
                             <ul class="comment-list">
 
                                 <?php
-                                while ($rowrevwsall = mysqli_fetch_assoc($resrevwsall)) {
-                                    $useridofthis = $rowrevwsall['userid'];
-                                    $sqlofthisname = "SELECT * FROM `005_omgss_users` WHERE `id`='$useridofthis'";
-                                    $resofthisname = mysqli_query($conn, $sqlofthisname);
-                                    $rowofthisname = mysqli_fetch_assoc($resofthisname);
-                                    ?>
-                                    <li class="comment">
-                                        <div class="vcard bio">
-                                            <!--  <img src="images/person_1.jpg" alt="Image placeholder"> -->
-                                        </div>
-                                        <div class="comment-body">
-                                            <h3><?php echo $rowofthisname['Name']; ?></h3>
-                                            <div class="meta"><?php echo $rowrevwsall['datetime']; ?></div>
-                                            <?php $starsrv = $rowrevwsall['rating'];
-                                            for ($i = 1; $i <= 5; $i++) {
-                                                if ($i <= $starsrv) {
-                                                    ?>
-                                                    <a style="color:blue">★</a>
-                                                    <?php
-                                                } else {
-                                                    ?>
-                                                    <a style="color:#f79f24">★</a>
-                                                    <?php
-                                                }
+                                    while ($rowrevwsall = mysqli_fetch_assoc($resrevwsall)) {
+                                        $useridofthis = $rowrevwsall['userid'];
+                                        $sqlofthisname = "SELECT * FROM `005_omgss_users` WHERE `id`='$useridofthis'";
+                                        $resofthisname = mysqli_query($conn, $sqlofthisname);
+                                        $rowofthisname = mysqli_fetch_assoc($resofthisname);
+                                        ?>
+                                        <li class="comment">
+                                            <div class="vcard bio">
+                                                <!--  <img src="images/person_1.jpg" alt="Image placeholder"> -->
+                                            </div>
+                                            <div class="comment-body">
+                                                <h3><?php echo $rowofthisname['Name']; ?></h3>
+                                                <div class="meta"><?php echo $rowrevwsall['datetime']; ?></div>
+                                                <?php $starsrv = $rowrevwsall['rating'];
+                                                    for ($i = 1; $i <= 5; $i++) {
+                                                        if ($i <= $starsrv) {
+                                                            ?>
+                                                            <a style="color:blue">★</a>
+                                                            <?php
+                                                        } else {
+                                                            ?>
+                                                            <a style="color:#f79f24">★</a>
+                                                            <?php
+                                                        }
 
-                                            }
+                                                    }
 
 
-                                            ?>
+                                                ?>
 
-                                            <p><?php echo $rowrevwsall['review']; ?></p>
-                                            <!-- <p><a href="#" class="reply">Reply</a></p> -->
-                                        </div>
-                                    </li>
-                                    <?php
-                                }
+                                                <p><?php echo $rowrevwsall['review']; ?></p>
+                                                <!-- <p><a href="#" class="reply">Reply</a></p> -->
+                                            </div>
+                                        </li>
+                                        <?php
+                                    }
                                 ?>
 
 
                             </ul>
                             <!-- END comment-list -->
                             <?php
-                            if (!($countrevws > 0)) {
-                                ?>
-                                <div class="comment-form-wrap pt-5">
-                                    <h3 class="mb-5">Leave a comment</h3>
-                                    <form method="post" class="p-5 bg-light">
-                                        <div class="form-group">
-                                            <label for="name">Rating *</label>
-                                            <a href="javascript:void(0)" id="star1">★</a>
-                                            <a href="javascript:void(0)" id="star2">★</a>
-                                            <a href="javascript:void(0)" id="star3">★</a>
-                                            <a href="javascript:void(0)" id="star4">★</a>
-                                            <a href="javascript:void(0)" id="star5">★</a>
-                                            <input type="text" name="rating" id="rating" hidden>
-                                        </div>
+                                if (!($countrevws > 0)) {
+                                    ?>
+                                    <div class="comment-form-wrap pt-5">
+                                        <h3 class="mb-5">Leave a comment</h3>
+                                        <form method="post" class="p-5 bg-light">
+                                            <div class="form-group">
+                                                <label for="name">Rating *</label>
+                                                <a href="javascript:void(0)" id="star1">★</a>
+                                                <a href="javascript:void(0)" id="star2">★</a>
+                                                <a href="javascript:void(0)" id="star3">★</a>
+                                                <a href="javascript:void(0)" id="star4">★</a>
+                                                <a href="javascript:void(0)" id="star5">★</a>
+                                                <input type="text" name="rating" id="rating" hidden>
+                                            </div>
 
-                                        <input type="text" name="prdidrv" id="prdidrv"
-                                               value="<?php echo $rowviewprod['id']; ?>" hidden>
-                                        <div class="form-group">
-                                            <label for="message">Message</label>
-                                            <textarea name="messagerev" id="message" cols="30" rows="10" required
-                                                      class="form-control"></textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="submit" value="Post Comment" name="postcomment"
-                                                   id="postcomment" class="btn py-3 px-4 btn-primary">
-                                        </div>
+                                            <input type="text" name="prdidrv" id="prdidrv"
+                                                   value="<?php echo $rowviewprod['id']; ?>" hidden>
+                                            <div class="form-group">
+                                                <label for="message">Message</label>
+                                                <textarea name="messagerev" id="message" cols="30" rows="10" required
+                                                          class="form-control"></textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="submit" value="Post Comment" name="postcomment"
+                                                       id="postcomment" class="btn py-3 px-4 btn-primary">
+                                            </div>
 
-                                    </form>
-                                </div>
-                                <?php
-                            }
+                                        </form>
+                                    </div>
+                                    <?php
+                                }
                             ?>
 
 
@@ -293,13 +293,13 @@ $countwishchk = mysqli_num_rows($reswishchk);
                         <h3>Tags</h3>
                         <div class="tagcloud">
                             <?php
-                            $tagsfr = $rowviewprod['tags'];
-                            $tagfrarr = explode(",", $tagsfr);
-                            foreach ($tagfrarr as $itmtag) {
-                                ?>
-                                <a href="javascript:void(0)" class="tag-cloud-link"><?php echo $itmtag; ?></a>
-                                <?php
-                            }
+                                $tagsfr = $rowviewprod['tags'];
+                                $tagfrarr = explode(",", $tagsfr);
+                                foreach ($tagfrarr as $itmtag) {
+                                    ?>
+                                    <a href="javascript:void(0)" class="tag-cloud-link"><?php echo $itmtag; ?></a>
+                                    <?php
+                                }
                             ?>
 
 
@@ -352,93 +352,93 @@ $countwishchk = mysqli_num_rows($reswishchk);
 
 <?php
 
-while ($rowallprd = mysqli_fetch_assoc($resallprd)) {
-    ?>
-    <script>
-        $(document).ready(function () {
+    while ($rowallprd = mysqli_fetch_assoc($resallprd)) {
+        ?>
+        <script>
+            $(document).ready(function () {
 
-            $("#minus").unbind("click").click(function () {
-                var valinpcount = $("#inpcount").val();
-                if (!((valinpcount - 1) < 1)) {
-                    valinpcount--;
-                }
-                $("#inpcount").val(valinpcount);
-                $("#spancount").html(valinpcount);
-            });
-
-            $("#plus").unbind("click").click(function () {
-                /*alert();*/
-                var valinpcount = $("#inpcount").val();
-                valinpcount++;
-                $("#inpcount").val(valinpcount);
-                $("#spancount").html(valinpcount);
-            });
-
-
-            $("#addtocart<?php echo $rowallprd['id'];?>").click(function () {
-                var ip = "<?php echo $ip;?>";
-                var userid = "<?php echo $_SESSION["sessid"];?>";
-                var prdid = "<?php echo $rowallprd['id'];?>";
-                var qnty = $("#inpcount").val();
-                var idcartchk = "<?php echo $idcartchk;?>";
-                $.ajax({
-                    type: "POST",
-                    url: "subfunctions/addtocartforviewproduct.php",
-                    data: {
-                        userid: userid,
-                        ip: ip,
-                        prdid: prdid,
-                        qnty: qnty,
-                        idcartchk: idcartchk,
-                        action: 'alertquerydf'
-                    },
-                    success: function (result) {
-                        $('#addtocart<?php echo $rowallprd['id'];?>').html(result);
-                        $('#addtocart<?php echo $rowallprd['id'];?>').attr('class', 'btn btn-success');
-
-
+                $("#minus").unbind("click").click(function () {
+                    var valinpcount = $("#inpcount").val();
+                    if (!((valinpcount - 1) < 1)) {
+                        valinpcount--;
                     }
+                    $("#inpcount").val(valinpcount);
+                    $("#spancount").html(valinpcount);
+                });
+
+                $("#plus").unbind("click").click(function () {
+                    /*alert();*/
+                    var valinpcount = $("#inpcount").val();
+                    valinpcount++;
+                    $("#inpcount").val(valinpcount);
+                    $("#spancount").html(valinpcount);
+                });
+
+
+                $("#addtocart<?php echo $rowallprd['id'];?>").click(function () {
+                    var ip = "<?php echo $ip;?>";
+                    var userid = "<?php echo $_SESSION["sessid"];?>";
+                    var prdid = "<?php echo $rowallprd['id'];?>";
+                    var qnty = $("#inpcount").val();
+                    var idcartchk = "<?php echo $idcartchk;?>";
+                    $.ajax({
+                        type: "POST",
+                        url: "subfunctions/addtocartforviewproduct.php",
+                        data: {
+                            userid: userid,
+                            ip: ip,
+                            prdid: prdid,
+                            qnty: qnty,
+                            idcartchk: idcartchk,
+                            action: 'alertquerydf'
+                        },
+                        success: function (result) {
+                            $('#addtocart<?php echo $rowallprd['id'];?>').html(result);
+                            $('#addtocart<?php echo $rowallprd['id'];?>').attr('class', 'btn btn-success');
+
+
+                        }
+                    });
+
+
+                });
+
+                $("#addtowishlist<?php echo $rowallprd['id'];?>").click(function () {
+                    var ip = "<?php echo $ip;?>";
+                    var userid = "<?php echo $_SESSION["sessid"];?>";
+                    var prdid = "<?php echo $rowallprd['id'];?>";
+                    var qnty = $("#inpcount").val();
+                    var idcartchk = "<?php echo $idcartchk;?>";
+                    $.ajax({
+                        type: "POST",
+                        url: "subfunctions/addtowishlistforviewproduct.php",
+                        data: {
+                            userid: userid,
+                            ip: ip,
+                            prdid: prdid,
+                            qnty: qnty,
+                            idcartchk: idcartchk,
+                            action: 'alertquerydf'
+                        },
+                        success: function (result) {
+
+                            $('#addtowishlist<?php echo $rowallprd['id'];?>').attr('class', 'btn btn-success');
+
+
+                        }
+                    });
+
+
                 });
 
 
             });
+        </script>
 
-            $("#addtowishlist<?php echo $rowallprd['id'];?>").click(function () {
-                var ip = "<?php echo $ip;?>";
-                var userid = "<?php echo $_SESSION["sessid"];?>";
-                var prdid = "<?php echo $rowallprd['id'];?>";
-                var qnty = $("#inpcount").val();
-                var idcartchk = "<?php echo $idcartchk;?>";
-                $.ajax({
-                    type: "POST",
-                    url: "subfunctions/addtowishlistforviewproduct.php",
-                    data: {
-                        userid: userid,
-                        ip: ip,
-                        prdid: prdid,
-                        qnty: qnty,
-                        idcartchk: idcartchk,
-                        action: 'alertquerydf'
-                    },
-                    success: function (result) {
-
-                        $('#addtowishlist<?php echo $rowallprd['id'];?>').attr('class', 'btn btn-success');
-
-
-                    }
-                });
-
-
-            });
-
-
-        });
-    </script>
-
-    <?php
-}
+        <?php
+    }
 ?>
 
 <?php
-include('footer.php');
+    include('footer.php');
 ?>

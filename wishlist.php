@@ -1,5 +1,5 @@
 <?php
-include('header.php');
+    include('header.php');
 
 ?>
 
@@ -362,59 +362,61 @@ include('header.php');
         </header>
         <div id="page">
             <?php
-            if ($countallwish > 0) {
-                ?>
-                <table id="cart">
-                    <thead style="text-align: center;">
-                    <tr>
-                        <th class="first">Service Image</th>
-                        <th class="third">Service Name</th>
-                        <th class="fourth">Move To Cart</th>
-                        <th class="fifth">&nbsp;</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <!-- shopping cart contents -->
+                if ($countallwish > 0) {
+                    ?>
+                    <table id="cart">
+                        <thead style="text-align: center;">
+                        <tr>
+                            <th class="first">Service Image</th>
+                            <th class="third">Service Name</th>
+                            <th class="fourth">Move To Cart</th>
+                            <th class="fifth">&nbsp;</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!-- shopping cart contents -->
 
 
-                    <?php
+                        <?php
 
 
-                    $carttotal = 0;
-                    while ($rowallwish = mysqli_fetch_assoc($rescountallwish)) {
-                        $productidwish = $rowallwish['prdid'];
-                        $sqlechprd = "SELECT * FROM `005_omgss_products` WHERE `id`='$productidwish'";
-                        $resechprd = mysqli_query($conn, $sqlechprd);
-                        $rowechprd = mysqli_fetch_assoc($resechprd);
+                            $carttotal = 0;
+                            while ($rowallwish = mysqli_fetch_assoc($rescountallwish)) {
+                                $productidwish = $rowallwish['prdid'];
+                                $sqlechprd = "SELECT * FROM `005_omgss_products` WHERE `id`='$productidwish'";
+                                $resechprd = mysqli_query($conn, $sqlechprd);
+                                $rowechprd = mysqli_fetch_assoc($resechprd);
+
+                                ?>
+                                <tr class="productitm">
+                                    <!-- http://www.inkydeals.com/deal/ginormous-bundle/ -->
+                                    <td><img src="admin/files/prod/<?php echo $rowechprd['image']; ?>"
+                                             class="thumb cartwish"
+                                             style=""></td>
+
+                                    <td><?php echo $rowechprd['name']; ?></td>
+                                    <td><a href="subfunctions/movetocart.php?id=<?php echo $rowallwish['id']; ?>"><i
+                                                    class="fa fa-shopping-cart" aria-hidden="true"
+                                                    style="color:blue"></i></a>
+                                    </td>
+                                    <td><a href="subfunctions/delwish.php?id=<?php echo $rowallwish['id']; ?>"
+                                           onclick="return confirm('Are you sure you want to delete this item')"><span
+                                                    class="remove"><i class="fa fa-trash"
+                                                                      style="    font-size: x-large;color:red"
+                                                                      aria-hidden="true"></i></span></a></td>
+                                </tr>
+                                <?php
+                            }
 
                         ?>
-                        <tr class="productitm">
-                            <!-- http://www.inkydeals.com/deal/ginormous-bundle/ -->
-                            <td><img src="admin/files/prod/<?php echo $rowechprd['image']; ?>" class="thumb cartwish"
-                                     style=""></td>
-
-                            <td><?php echo $rowechprd['name']; ?></td>
-                            <td><a href="subfunctions/movetocart.php?id=<?php echo $rowallwish['id']; ?>"><i
-                                            class="fa fa-shopping-cart" aria-hidden="true" style="color:blue"></i></a>
-                            </td>
-                            <td><a href="subfunctions/delwish.php?id=<?php echo $rowallwish['id']; ?>"
-                                   onclick="return confirm('Are you sure you want to delete this item')"><span
-                                            class="remove"><i class="fa fa-trash"
-                                                              style="    font-size: x-large;color:red"
-                                                              aria-hidden="true"></i></span></a></td>
-                        </tr>
-                        <?php
-                    }
-
-                    ?>
 
 
-                    </tbody>
-                </table>
-                <?php
-            } else {
-                echo '<h3 style="color:red">No items to display</h3>';
-            }
+                        </tbody>
+                    </table>
+                    <?php
+                } else {
+                    echo '<h3 style="color:red">No items to display</h3>';
+                }
             ?>
         </div>
     </div>
@@ -422,5 +424,5 @@ include('header.php');
 
 
 <?php
-include('footer.php');
+    include('footer.php');
 ?>

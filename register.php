@@ -1,5 +1,5 @@
 <?php
-include('header.php');
+    include('header.php');
 ?>
     <style>
         .ftco-appointment .half {
@@ -93,5 +93,5 @@ include('header.php');
         </div>
     </section>
 <?php
-include('footer.php');
+    include('footer.php');
 ?>

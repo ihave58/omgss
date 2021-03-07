@@ -1,12 +1,12 @@
 <?php
-header("Cache-Control: no-cache, must-revalidate");
-$chkpage = 5;
-session_start();
-include('header.php');
-include('sidebar.php');
+    header("Cache-Control: no-cache, must-revalidate");
+    $chkpage = 5;
+    session_start();
+    include('header.php');
+    include('sidebar.php');
 
-include('db.php');
-include('includes/btnposts.php');
+    include('db.php');
+    include('includes/btnposts.php');
 ?>
 
 
@@ -95,5 +95,5 @@ include('includes/btnposts.php');
 
 
 <?php
-include('footer.php');
+    include('footer.php');
 ?>

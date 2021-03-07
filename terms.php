@@ -1,5 +1,5 @@
 <?php
-include('header.php');
+    include('header.php');
 ?>
     <section class="hero-wrap hero-wrap-2"
              style="background-image: url('admin/files/extras/<?php echo $rowterms['image']; ?>');"
@@ -37,5 +37,5 @@ include('header.php');
 
 
 <?php
-include('footer.php');
+    include('footer.php');
 ?>

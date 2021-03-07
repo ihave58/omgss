@@ -1,10 +1,8 @@
 <?php
-$chkpage = 8;
-include('header.php');
-include('sidebar.php');
+    $chkpage = 8;
+    include('header.php');
+    include('sidebar.php');
 ?>
-
-
     <style>
         tr {
             margin-top: 10px !important;
@@ -93,5 +91,5 @@ include('sidebar.php');
 
 
 <?php
-include('footer.php');
+    include('footer.php');
 ?>

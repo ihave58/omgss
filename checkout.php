@@ -1,71 +1,70 @@
 <?php
-require('razorpay/config.php');
-require('razorpay/razorpay-php/Razorpay.php');
+    require('razorpay/config.php');
+    require('razorpay/razorpay-php/Razorpay.php');
 
-use Razorpay\Api\Api;
+    use Razorpay\Api\Api;
 
-include('header.php');
-if ($_SESSION["sessid"] == "") {
-    echo '<script>window.location.href="index.php";</script>';
-}
-
-if (isset($_POST['checkoutbtn'])) {
-
-    $totalvalue = $_SESSION['totalvalue'];
-    $fullname = $_POST['fullname'];
-    $email = $_POST['email'];
-    $address = $_POST['address'];
-    $city = $_POST['city'];
-    $state = $_POST['state'];
-    $zip = $_POST['zip'];
-    $paytype = $_POST['paytype'];
-    $_SESSION['paytype'] = $paytype;
-    $couponidsvdb = $_SESSION['coupidfrsv'];
-
-    $orderdetails = array();
-    $countpl = 0;
-    $sqlcountallcartor = "SELECT * FROM `005_omgss_cart` WHERE `ip`='$ip' OR `userid`='$loggeduserid'";
-    $rescountallcartor = mysqli_query($conn, $sqlcountallcartor);
-    while ($rowcountallcartor = mysqli_fetch_assoc($rescountallcartor)) {
-        $countpl++;
-        $productcartidpl = $rowcountallcartor['prdid'];
-        $quantitycartidpl = $rowcountallcartor['quantity'];
-        $sqlgetsproductdet = "SELECT * FROM `005_omgss_products` WHERE `id`='$productcartidpl'";
-        $resgetsproductdet = mysqli_query($conn, $sqlgetsproductdet);
-        $rowgetsproductdet = mysqli_fetch_assoc($resgetsproductdet);
-        $orderdetails[$countpl] = array(
-            'productid' => $productcartidpl,
-            'saleprice' => $rowgetsproductdet['saleprice'],
-            'quantity' => $quantitycartidpl,
-        );
+    include('header.php');
+    if ($_SESSION['sessid'] == "") {
+        echo '<script>window.location.href="index.php";</script>';
     }
-    $sqlgetscoupdet = "SELECT * FROM `005_omgss_coupons` WHERE `id`='$couponidsvdb'";
-    $resgetscoupdet = mysqli_query($conn, $sqlgetscoupdet);
-    $rowgetscoupdet = mysqli_fetch_assoc($resgetscoupdet);
-    $coupondetails = $rowgetscoupdet;
-    $coupondetailsjs = json_encode($coupondetails);
-    $orderdetailsjs = json_encode($orderdetails);
-    $dateind = date("Y-m-d") . " " . date("h:i:sa");
-    if ($paytype == "cos") {
 
-        $sqlcreate = "INSERT INTO `005_omgss_orders` (`userid`,`orderdetails`,`fullname`,`email`,`address`,`city`,`state`,`zip`,`paymenttype`,`totalordervalue`,`status`,`couponcode`,`coupondetails`,`datetimeind`) VALUES ('$loggeduserid','$orderdetailsjs','$fullname','$email','$address','$city','$state','$zip','$paytype','$totalvalue','Success','$couponidsvdb','$coupondetailsjs','$dateind')";
+    if (isset($_POST['checkoutbtn'])) {
+        $totalvalue = $_SESSION['totalvalue'];
+        $fullname = runUserInputSanitizationHook($_POST['fullname']);
+        $email = runUserInputSanitizationHook($_POST['email']);
+        $address = runUserInputSanitizationHook($_POST['address']);
+        $city = runUserInputSanitizationHook($_POST['city']);
+        $state = runUserInputSanitizationHook($_POST['state']);
+        $zip = runUserInputSanitizationHook($_POST['zip']);
+        $paytype = runUserInputSanitizationHook($_POST['paytype']);
+        $_SESSION['paytype'] = $paytype;
+        $couponidsvdb = $_SESSION['coupidfrsv'];
+
+        $orderdetails = array();
+        $countpl = 0;
+        $sqlcountallcartor = "SELECT * FROM `005_omgss_cart` WHERE `ip`='$ip' OR `userid`='$loggeduserid'";
+        $rescountallcartor = mysqli_query($conn, $sqlcountallcartor);
+        while ($rowcountallcartor = mysqli_fetch_assoc($rescountallcartor)) {
+            $countpl++;
+            $productcartidpl = $rowcountallcartor['prdid'];
+            $quantitycartidpl = $rowcountallcartor['quantity'];
+            $sqlgetsproductdet = "SELECT * FROM `005_omgss_products` WHERE `id`='$productcartidpl'";
+            $resgetsproductdet = mysqli_query($conn, $sqlgetsproductdet);
+            $rowgetsproductdet = mysqli_fetch_assoc($resgetsproductdet);
+            $orderdetails[$countpl] = array(
+                'productid' => $productcartidpl,
+                'saleprice' => $rowgetsproductdet['saleprice'],
+                'quantity' => $quantitycartidpl,
+            );
+        }
+        $sqlgetscoupdet = "SELECT * FROM `005_omgss_coupons` WHERE `id`='$couponidsvdb'";
+        $resgetscoupdet = mysqli_query($conn, $sqlgetscoupdet);
+        $rowgetscoupdet = mysqli_fetch_assoc($resgetscoupdet);
+        $coupondetails = $rowgetscoupdet;
+        $coupondetailsjs = json_encode($coupondetails);
+        $orderdetailsjs = json_encode($orderdetails);
+        $dateind = date("Y-m-d") . " " . date("h:i:sa");
+        if ($paytype == "cos") {
+
+            $sqlcreate = "INSERT INTO `005_omgss_orders` (`userid`,`orderdetails`,`fullname`,`email`,`address`,`city`,`state`,`zip`,`paymenttype`,`totalordervalue`,`status`,`couponcode`,`coupondetails`,`datetimeind`) VALUES ('$loggeduserid','$orderdetailsjs','$fullname','$email','$address','$city','$state','$zip','$paytype','$totalvalue','Success','$couponidsvdb','$coupondetailsjs','$dateind')";
 
 
-        if ($conn->query($sqlcreate) === TRUE) {
-            $_SESSION['lastid'] = mysqli_insert_id($conn);
-            mysqli_query($conn, "DELETE FROM `005_omgss_cart` WHERE `ip`='$ip' OR `userid`='$loggeduserid'");
-            $messnoti = "Your Order OMGORD" . $_SESSION['lastid'] . " has been received by us";
-            mysqli_query($conn, "INSERT INTO `005_omgss_usernotifications`(`userid`,`image`,`content`)VALUES('$loggeduserid','pass.png','$messnoti')");
+            if ($conn->query($sqlcreate) === TRUE) {
+                $_SESSION['lastid'] = mysqli_insert_id($conn);
+                mysqli_query($conn, "DELETE FROM `005_omgss_cart` WHERE `ip`='$ip' OR `userid`='$loggeduserid'");
+                $messnoti = "Your Order OMGORD" . $_SESSION['lastid'] . " has been received by us";
+                mysqli_query($conn, "INSERT INTO `005_omgss_usernotifications`(`userid`,`image`,`content`)VALUES('$loggeduserid','pass.png','$messnoti')");
 
-            $_SESSION['dsc'] = 0;
-            $_SESSION['totalvalue'] = 0;
-            $_SESSION['cccode'] = "";
-            $_SESSION['dsctype'] = 0;
+                $_SESSION['dsc'] = 0;
+                $_SESSION['totalvalue'] = 0;
+                $_SESSION['cccode'] = "";
+                $_SESSION['dsctype'] = 0;
 
-            echo '<script>window.location.href="thankyou.php";</script>';
-        } else {
+                echo '<script>window.location.href="thankyou.php";</script>';
+            } else {
 
-            echo '<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+                echo '<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
             
                       <link href="http://tristanedwards.me/u/SweetAlert/lib/sweet-alert.css" rel="stylesheet" />
 
@@ -92,80 +91,80 @@ if (isset($_POST['checkoutbtn'])) {
                   </script>
                     ';
 
-        }
-    } else if ($paytype == "prep") {
-        $sqlcreate = "INSERT INTO `005_omgss_orders` (`userid`,`orderdetails`,`fullname`,`email`,`address`,`city`,`state`,`zip`,`paymenttype`,`totalordervalue`,`couponcode`,`coupondetails`,`datetimeind`) VALUES ('$loggeduserid','$orderdetailsjs','$fullname','$email','$address','$city','$state','$zip','$paytype','$totalvalue','$couponidsvdb','$coupondetailsjs','$dateind')";
-        $rescreate = mysqli_query($conn, $sqlcreate);
-        $_SESSION['lastid'] = mysqli_insert_id($conn);
-        $api = new Api($keyId, $keySecret);
+            }
+        } else if ($paytype == "prep") {
+            $sqlcreate = "INSERT INTO `005_omgss_orders` (`userid`,`orderdetails`,`fullname`,`email`,`address`,`city`,`state`,`zip`,`paymenttype`,`totalordervalue`,`couponcode`,`coupondetails`,`datetimeind`) VALUES ('$loggeduserid','$orderdetailsjs','$fullname','$email','$address','$city','$state','$zip','$paytype','$totalvalue','$couponidsvdb','$coupondetailsjs','$dateind')";
+            $rescreate = mysqli_query($conn, $sqlcreate);
+            $_SESSION['lastid'] = mysqli_insert_id($conn);
+            $api = new Api($keyId, $keySecret);
 
-        //
-        // We create an razorpay order using orders api
-        // Docs: https://docs.razorpay.com/docs/orders
-        //
-        $orderData = [
-            'receipt' => 3456,
-            'amount' => $totalvalue * 100, // 2000 rupees in paise
-            'currency' => 'INR',
-            'payment_capture' => 1 // auto capture
-        ];
+            //
+            // We create an razorpay order using orders api
+            // Docs: https://docs.razorpay.com/docs/orders
+            //
+            $orderData = [
+                'receipt' => 3456,
+                'amount' => $totalvalue * 100, // 2000 rupees in paise
+                'currency' => 'INR',
+                'payment_capture' => 1 // auto capture
+            ];
 
-        $razorpayOrder = $api->order->create($orderData);
+            $razorpayOrder = $api->order->create($orderData);
 
-        $razorpayOrderId = $razorpayOrder['id'];
+            $razorpayOrderId = $razorpayOrder['id'];
 
-        $_SESSION['razorpay_order_id'] = $razorpayOrderId;
+            $_SESSION['razorpay_order_id'] = $razorpayOrderId;
 
-        $displayAmount = $amount = $orderData['amount'];
+            $displayAmount = $amount = $orderData['amount'];
 
-        if ($displayCurrency !== 'INR') {
-            /* $url = "https://api.fixer.io/latest?symbols=$displayCurrency&base=INR";
-             $exchange = json_decode(file_get_contents($url), true);
+            if ($displayCurrency !== 'INR') {
+                /* $url = "https://api.fixer.io/latest?symbols=$displayCurrency&base=INR";
+                 $exchange = json_decode(file_get_contents($url), true);
 
-             $displayAmount = $exchange['rates'][$displayCurrency] * $amount / 100;*/
-        }
+                 $displayAmount = $exchange['rates'][$displayCurrency] * $amount / 100;*/
+            }
 
-        $checkout = 'automatic';
+            $checkout = 'automatic';
 
-        if (isset($_GET['checkout']) and in_array($_GET['checkout'], ['automatic', 'manual'], true)) {
-            $checkout = $_GET['checkout'];
-        }
+            if (isset($_GET['checkout']) and in_array($_GET['checkout'], ['automatic', 'manual'], true)) {
+                $checkout = runUserInputSanitizationHook($_GET['checkout']);
+            }
 
-        $data = [
-            "key" => $keyId,
-            "amount" => $totalvalue,
-            "name" => "",
-            "description" => "",
-            "image" => "images/logo.png",
-            "prefill" => [
+            $data = [
+                "key" => $keyId,
+                "amount" => $totalvalue,
                 "name" => "",
-                "email" => "",
-                "contact" => "",
-            ],
-            "notes" => [
-                "address" => "",
-                "merchant_order_id" => "",
-            ],
-            "theme" => [
-                "color" => "#F37254"
-            ],
-            "order_id" => $razorpayOrderId,
-        ];
+                "description" => "",
+                "image" => "images/logo.png",
+                "prefill" => [
+                    "name" => "",
+                    "email" => "",
+                    "contact" => "",
+                ],
+                "notes" => [
+                    "address" => "",
+                    "merchant_order_id" => "",
+                ],
+                "theme" => [
+                    "color" => "#F37254"
+                ],
+                "order_id" => $razorpayOrderId,
+            ];
 
-        if ($displayCurrency !== 'INR') {
-            $data['display_currency'] = $displayCurrency;
-            $data['display_amount'] = $displayAmount;
+            if ($displayCurrency !== 'INR') {
+                $data['display_currency'] = $displayCurrency;
+                $data['display_amount'] = $displayAmount;
+            }
+
+            $json = json_encode($data);
+
+            require("razorpay/checkout/{$checkout}.php");
+
+
         }
-
-        $json = json_encode($data);
-
-        require("razorpay/checkout/{$checkout}.php");
 
 
     }
-
-
-}
 
 ?>
     <!DOCTYPE html>
@@ -375,23 +374,23 @@ if (isset($_POST['checkoutbtn'])) {
                         <form method="post">
                             <h3>Billing Address
                                 <?php
-                                if ($countbilladd > 0) {
-                                    ?>
-                                    <select style="font-size: small;width: 16%;" name="selid" id="selid">
-                                        <option value="">Select</option>
-
-                                        <?php
-                                        while ($rowbilladd = mysqli_fetch_assoc($resbilladd)) {
-                                            ?>
-                                            <option value="<?php echo $rowbilladd['id']; ?>" <?php if ($rowbaddevbillingaddressidforuser['id'] == $rowbilladd['id']) {
-                                                echo 'selected';
-                                            } ?> ><?php echo $rowbilladd['addressprofilename'] . ": " . $rowbilladd['Address'] . ", " . $rowbilladd['City'] . ", " . $rowbilladd['State']; ?></option>
-                                            <?php
-                                        }
-
+                                    if ($countbilladd > 0) {
                                         ?>
-                                    </select><input type="submit" id="buttonbillingadd" name="buttonbillingadd"
-                                                    hidden><?php } ?></h3>
+                                        <select style="font-size: small;width: 16%;" name="selid" id="selid">
+                                            <option value="">Select</option>
+
+                                            <?php
+                                                while ($rowbilladd = mysqli_fetch_assoc($resbilladd)) {
+                                                    ?>
+                                                    <option value="<?php echo $rowbilladd['id']; ?>" <?php if ($rowbaddevbillingaddressidforuser['id'] == $rowbilladd['id']) {
+                                                        echo 'selected';
+                                                    } ?> ><?php echo $rowbilladd['addressprofilename'] . ": " . $rowbilladd['Address'] . ", " . $rowbilladd['City'] . ", " . $rowbilladd['State']; ?></option>
+                                                    <?php
+                                                }
+
+                                            ?>
+                                        </select><input type="submit" id="buttonbillingadd" name="buttonbillingadd"
+                                                        hidden><?php } ?></h3>
                         </form>
                         <form method="post">
 
@@ -495,20 +494,20 @@ if (isset($_POST['checkoutbtn'])) {
                 <h4>Cart <span class="price" style="color:black"><i
                                 class="fa fa-shopping-cart"></i> <b><?php echo $countallcart; ?></b></span></h4>
                 <?php
-                while ($rowcountallcart = mysqli_fetch_assoc($rescountallcart)) {
-                    $productidcart = $rowcountallcart['prdid'];
-                    $sqlechprd = "SELECT * FROM `005_omgss_products` WHERE `id`='$productidcart'";
-                    $resechprd = mysqli_query($conn, $sqlechprd);
-                    $rowechprd = mysqli_fetch_assoc($resechprd);
-                    $carttotal = $carttotal + $rowechprd['saleprice'];
-                    $tax = (float)($carttotal * (18 / 100));
-                    $carttotalwithtax = (float)($carttotal + $tax) - $_SESSION['coupdisc'];
-                    ?>
-                    <p>
-                        <a href="viewproduct.php?prodid=<?php echo $rowechprd['id']; ?>"><?php echo $rowechprd['name']; ?></a>
-                        <span class="price">Rs. <?php echo $rowechprd['saleprice']; ?></span></p>
-                    <?php
-                }
+                    while ($rowcountallcart = mysqli_fetch_assoc($rescountallcart)) {
+                        $productidcart = $rowcountallcart['prdid'];
+                        $sqlechprd = "SELECT * FROM `005_omgss_products` WHERE `id`='$productidcart'";
+                        $resechprd = mysqli_query($conn, $sqlechprd);
+                        $rowechprd = mysqli_fetch_assoc($resechprd);
+                        $carttotal = $carttotal + $rowechprd['saleprice'];
+                        $tax = (float)($carttotal * (18 / 100));
+                        $carttotalwithtax = (float)($carttotal + $tax) - $_SESSION['coupdisc'];
+                        ?>
+                        <p>
+                            <a href="viewproduct.php?prodid=<?php echo $rowechprd['id']; ?>"><?php echo $rowechprd['name']; ?></a>
+                            <span class="price">Rs. <?php echo $rowechprd['saleprice']; ?></span></p>
+                        <?php
+                    }
                 ?>
 
 
@@ -531,5 +530,5 @@ if (isset($_POST['checkoutbtn'])) {
         });
     </script>
 <?php
-include('footer.php');
+    include('footer.php');
 ?>

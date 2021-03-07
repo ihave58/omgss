@@ -1,5 +1,5 @@
 <?php
-include('header.php');
+    include('header.php');
 ?>
     <section class="ftco-appointment ftco-section ftco-no-pt ftco-no-pb img"
              style="background-image: url(images/complain.jpg);">
@@ -51,5 +51,5 @@ include('header.php');
         </div>
     </section>
 <?php
-include('footer.php');
+    include('footer.php');
 ?>

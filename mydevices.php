@@ -1,8 +1,8 @@
 <?php
-include('header.php');
-if ($_SESSION["sessid"] == "") {
-    echo '<script>window.location.href="index.php";</script>';
-}
+    include('header.php');
+    if ($_SESSION["sessid"] == "") {
+        echo '<script>window.location.href="index.php";</script>';
+    }
 ?>
     <style>
         label {
@@ -15,11 +15,11 @@ if ($_SESSION["sessid"] == "") {
          style="width:217px; background: #0071ff;    color: white !important;     padding-top: 35px;" id="mySidebar">
         <button class="w3-bar-item w3-button w3-large w3-hide-large" onclick="w3_close()">Close &times;</button>
         <?php
-        include('sidebar.php');
+            include('sidebar.php');
         ?>
     </div>
 <?php
-include('datatables.php');
+    include('datatables.php');
 ?>
     <div class="w3-main" style="margin-left:200px; "><!--  height: 500px !important; -->
         <div class="w3-teal" style="background-color: #f79f24!important;">
@@ -41,63 +41,63 @@ include('datatables.php');
 
 
                                 <?php
-                                if ($countgetdevicesfr > 0) {
-                                    ?>
-                                    <table class="table table-striped  table-hover" id="dataTables-example">
-                                        <thead style="color:black">
-                                        <th>Sl.</th>
-                                        <th>Device Name</th>
-                                        <th>Device Id</th>
-                                        <th>Quantity</th>
-                                        <th>Order ID</th>
-                                        <th>Date (Start)</th>
-                                        <th>Date (Expire)</th>
-                                        <th>Days Left</th>
-
-
-                                        </thead>
-                                        <tbody>
-
-                                        <?php
-                                        $counterbadd = 0;
-                                        while ($rowgetdevicesfr = mysqli_fetch_assoc($resgetdevicesfr)) {
-                                            $counterbadd++;
-                                            $gtprdid = $rowgetdevicesfr['productid'];
-                                            $sqlprp = "SELECT * FROM `005_omgss_products` WHERE `id`='$gtprdid'";
-                                            $resprp = mysqli_query($conn, $sqlprp);
-                                            $rowprp = mysqli_fetch_assoc($resprp);
-
-                                            $date1 = date("Y/m/d");
-                                            $date2 = date('Y-m-d H:i:s', strtotime($rowgetdevicesfr['datetime'] . ' + 365 days'));
-                                            $diff = strtotime($date2) - strtotime($date1);
-                                            $dateDiff = abs(round($diff / 86400));
-
-                                            ?>
-                                            <tr>
-                                                <td><?php echo $counterbadd; ?></td>
-                                                <td><?php echo $rowprp['name']; ?></td>
-                                                <td><?php echo $rowprp['id']; ?></td>
-                                                <td><?php echo $rowgetdevicesfr['quantity']; ?></td>
-                                                <td><?php echo "OMGORD" . $rowgetdevicesfr['orderid']; ?></td>
-                                                <td><?php echo $rowgetdevicesfr['datetime']; ?></td>
-                                                <td><?php echo $date2; ?></td>
-                                                <td><?php if ($diff <= 0) {
-                                                        echo "<span style='color:red'>Expired</span>";
-                                                    } else {
-                                                        echo $dateDiff;
-                                                    } ?></td>
-
-                                            </tr>
-                                            <?php
-                                        }
+                                    if ($countgetdevicesfr > 0) {
                                         ?>
+                                        <table class="table table-striped  table-hover" id="dataTables-example">
+                                            <thead style="color:black">
+                                            <th>Sl.</th>
+                                            <th>Device Name</th>
+                                            <th>Device Id</th>
+                                            <th>Quantity</th>
+                                            <th>Order ID</th>
+                                            <th>Date (Start)</th>
+                                            <th>Date (Expire)</th>
+                                            <th>Days Left</th>
 
-                                        </tbody>
-                                    </table>
-                                    <?php
-                                } else {
-                                    echo '<p>No Orders Found</p>';
-                                }
+
+                                            </thead>
+                                            <tbody>
+
+                                            <?php
+                                                $counterbadd = 0;
+                                                while ($rowgetdevicesfr = mysqli_fetch_assoc($resgetdevicesfr)) {
+                                                    $counterbadd++;
+                                                    $gtprdid = $rowgetdevicesfr['productid'];
+                                                    $sqlprp = "SELECT * FROM `005_omgss_products` WHERE `id`='$gtprdid'";
+                                                    $resprp = mysqli_query($conn, $sqlprp);
+                                                    $rowprp = mysqli_fetch_assoc($resprp);
+
+                                                    $date1 = date("Y/m/d");
+                                                    $date2 = date('Y-m-d H:i:s', strtotime($rowgetdevicesfr['datetime'] . ' + 365 days'));
+                                                    $diff = strtotime($date2) - strtotime($date1);
+                                                    $dateDiff = abs(round($diff / 86400));
+
+                                                    ?>
+                                                    <tr>
+                                                        <td><?php echo $counterbadd; ?></td>
+                                                        <td><?php echo $rowprp['name']; ?></td>
+                                                        <td><?php echo $rowprp['id']; ?></td>
+                                                        <td><?php echo $rowgetdevicesfr['quantity']; ?></td>
+                                                        <td><?php echo "OMGORD" . $rowgetdevicesfr['orderid']; ?></td>
+                                                        <td><?php echo $rowgetdevicesfr['datetime']; ?></td>
+                                                        <td><?php echo $date2; ?></td>
+                                                        <td><?php if ($diff <= 0) {
+                                                                echo "<span style='color:red'>Expired</span>";
+                                                            } else {
+                                                                echo $dateDiff;
+                                                            } ?></td>
+
+                                                    </tr>
+                                                    <?php
+                                                }
+                                            ?>
+
+                                            </tbody>
+                                        </table>
+                                        <?php
+                                    } else {
+                                        echo '<p>No Orders Found</p>';
+                                    }
                                 ?>
 
 
@@ -136,14 +136,14 @@ include('datatables.php');
 
 
 <?php
-$selopt = "";
-while ($rowgetdevicesfrcom = mysqli_fetch_assoc($resgetdevicesfrcom)) {
-    $gtprdidcom = $rowgetdevicesfrcom['productid'];
-    $sqlprpcom = "SELECT * FROM `005_omgss_products` WHERE `id`='$gtprdidcom'";
-    $resprpcom = mysqli_query($conn, $sqlprpcom);
-    $rowprpcom = mysqli_fetch_assoc($resprpcom);
-    $selopt .= "<option value='" . $rowgetdevicesfrcom['id'] . "'>" . $rowprpcom['name'] . "</option>";
-}
+    $selopt = "";
+    while ($rowgetdevicesfrcom = mysqli_fetch_assoc($resgetdevicesfrcom)) {
+        $gtprdidcom = $rowgetdevicesfrcom['productid'];
+        $sqlprpcom = "SELECT * FROM `005_omgss_products` WHERE `id`='$gtprdidcom'";
+        $resprpcom = mysqli_query($conn, $sqlprpcom);
+        $rowprpcom = mysqli_fetch_assoc($resprpcom);
+        $selopt .= "<option value='" . $rowgetdevicesfrcom['id'] . "'>" . $rowprpcom['name'] . "</option>";
+    }
 ?>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
@@ -181,5 +181,5 @@ while ($rowgetdevicesfrcom = mysqli_fetch_assoc($resgetdevicesfrcom)) {
     </script>
 
 <?php
-include('footer.php');
+    include('footer.php');
 ?>

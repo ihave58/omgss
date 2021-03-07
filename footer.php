@@ -62,13 +62,14 @@
                     <h2 class="ftco-heading-2">Services</h2>
                     <ul class="list-unstyled">
                         <?php
-                        while ($rowcath1 = mysqli_fetch_assoc($rescath1)) {
-                            ?>
-                            <li><a href="moreservices.php?catid=<?php echo $rowcath1['id']; ?>"
-                                   class="py-1 d-block"><span
-                                            class="fa fa-check mr-3"></span><?php echo $rowcath1['name']; ?></a></li>
-                            <?php
-                        }
+                            while ($rowcath1 = mysqli_fetch_assoc($rescath1)) {
+                                ?>
+                                <li><a href="moreservices.php?catid=<?php echo $rowcath1['id']; ?>"
+                                       class="py-1 d-block"><span
+                                                class="fa fa-check mr-3"></span><?php echo $rowcath1['name']; ?></a>
+                                </li>
+                                <?php
+                            }
                         ?>
 
                     </ul>

@@ -1,5 +1,5 @@
 <?php
-include('header.php');
+    include('header.php');
 ?>
     <style>
         .testimony-wrap .user-img {
@@ -35,45 +35,45 @@ include('header.php');
 
 
                 <?php
-                if ($countsubcats > 0) {
-                    while ($rowsubcats = mysqli_fetch_assoc($ressubcats)) {
-                        ?>
+                    if ($countsubcats > 0) {
+                        while ($rowsubcats = mysqli_fetch_assoc($ressubcats)) {
+                            ?>
 
-                        <div class="col-md-4">
-                            <!--    <div class="carousel-testimony owl-carousel ftco-owl"> -->
-                            <a href="products.php?scatid=<?php echo $rowsubcats['id']; ?>">
-                                <div class="item" style="width: 100%;">
-                                    <div class="testimony-wrap py-4">
-                                        <!-- <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-quote-left"></span></div> -->
-                                        <div class="text">
-                                            <div class="user-img"
-                                                 style="background-image: url(admin/files/sub/<?php echo $rowsubcats['subcatimage']; ?>)"></div>
-                                            <div class="align-items-center">
+                            <div class="col-md-4">
+                                <!--    <div class="carousel-testimony owl-carousel ftco-owl"> -->
+                                <a href="products.php?scatid=<?php echo $rowsubcats['id']; ?>">
+                                    <div class="item" style="width: 100%;">
+                                        <div class="testimony-wrap py-4">
+                                            <!-- <div class="icon d-flex align-items-center justify-content-center"><span class="fa fa-quote-left"></span></div> -->
+                                            <div class="text">
+                                                <div class="user-img"
+                                                     style="background-image: url(admin/files/sub/<?php echo $rowsubcats['subcatimage']; ?>)"></div>
+                                                <div class="align-items-center">
 
-                                                <div class="pl-12">
-                                                    <p class="name"
-                                                       style="text-align: center"><?php echo $rowsubcats['subcatname']; ?></p>
-                                                    <!-- <span class="position">Marketing Manager</span> -->
+                                                    <div class="pl-12">
+                                                        <p class="name"
+                                                           style="text-align: center"><?php echo $rowsubcats['subcatname']; ?></p>
+                                                        <!-- <span class="position">Marketing Manager</span> -->
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
 
-                            </a>
+                                </a>
 
-                            <!-- </div> -->
-                        </div>
+                                <!-- </div> -->
+                            </div>
 
+                            <?php
+                        }
+
+                    } else {
+                        ?>
+                        <p>No Items to Display</p>
                         <?php
                     }
-
-                } else {
-                    ?>
-                    <p>No Items to Display</p>
-                    <?php
-                }
                 ?>
 
 
@@ -83,5 +83,5 @@ include('header.php');
 
 
 <?php
-include('footer.php');
+    include('footer.php');
 ?>

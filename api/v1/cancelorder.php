@@ -2,6 +2,7 @@
     include_once('../../include/db.php');
     require('../../razorpay/config.php');
     require('../../razorpay/razorpay-php/Razorpay.php');
+    require("../../include/utils.php");
 
     use Razorpay\Api\Api;
 
@@ -13,8 +14,8 @@
         echo $response = json_encode(array('status' => 'error', 'message' => "Token Can't be Empty"));
         exit;
     } else {
-        $urlid = $_POST['appid'];
-        $urltoken = $_POST['token'];
+        $urlid = runUserInputSanitizationHook($_POST['appid']);
+        $urltoken = runUserInputSanitizationHook($_POST['token']);
 
         $sql1 = "SELECT id FROM 003_omgss_api_tokens WHERE app_id='" . $urlid . "' AND app_token='" . $urltoken . "'";
         $results = mysqli_query($conn, $sql1);
@@ -36,8 +37,8 @@
 
     if ($method == 'POST') {
 
-        $loggeduserid = (isset($_POST['loggeduserid'])) ? $_POST['loggeduserid'] : '';
-        $id = (isset($_POST['orderid'])) ? $_POST['orderid'] : '';
+        $loggeduserid = (isset($_POST['loggeduserid'])) ? runUserInputSanitizationHook($_POST['loggeduserid']) : '';
+        $id = (isset($_POST['orderid'])) ? runUserInputSanitizationHook($_POST['orderid']) : '';
 
         if ((empty($loggeduserid)) || (empty($id))) {
             $response = array('status' => 'error', 'message' => 'Input fields cannot be empty');

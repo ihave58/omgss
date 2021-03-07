@@ -1,8 +1,8 @@
 <?php
-include('header.php');
-if ($_SESSION["sessid"] == "") {
-    echo '<script>window.location.href="index.php";</script>';
-}
+    include('header.php');
+    if ($_SESSION["sessid"] == "") {
+        echo '<script>window.location.href="index.php";</script>';
+    }
 ?>
 
     <link rel="stylesheet" href="css/w3.css">
@@ -11,7 +11,7 @@ if ($_SESSION["sessid"] == "") {
          style="width:217px; background: #0071ff;    color: white;     padding-top: 35px;" id="mySidebar">
         <button class="w3-bar-item w3-button w3-large w3-hide-large" onclick="w3_close()">Close &times;</button>
         <?php
-        include('sidebar.php');
+            include('sidebar.php');
         ?>
     </div>
 
@@ -53,5 +53,5 @@ if ($_SESSION["sessid"] == "") {
     </script>
 
 <?php
-include('footer.php');
+    include('footer.php');
 ?>

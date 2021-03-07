@@ -1,5 +1,5 @@
 <?php
-include('header.php');
+    include('header.php');
 ?>
     <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_2.jpg');"
              data-stellar-background-ratio="0.5">
@@ -142,5 +142,5 @@ include('header.php');
     </section>
 
 <?php
-include('footer.php');
+    include('footer.php');
 ?>

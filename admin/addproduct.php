@@ -1,7 +1,7 @@
 <?php
 
-include('header.php');
-include('sidebar.php');
+    include('header.php');
+    include('sidebar.php');
 ?>
 
 
@@ -75,13 +75,13 @@ include('sidebar.php');
                                                     placeholder="Category">
                                                 <option selected disabled>Select</option>
                                                 <?php
-                                                while ($rowcat = mysqli_fetch_assoc($rescat)) {
-                                                    ?>
-                                                    <option value="<?php echo $rowcat['id']; ?>" <?php if ($rowprodsedit['categoryid'] == $rowcat['id']) {
-                                                        echo 'selected';
-                                                    }; ?>><?php echo $rowcat['name']; ?></option>
-                                                    <?php
-                                                }
+                                                    while ($rowcat = mysqli_fetch_assoc($rescat)) {
+                                                        ?>
+                                                        <option value="<?php echo $rowcat['id']; ?>" <?php if ($rowprodsedit['categoryid'] == $rowcat['id']) {
+                                                            echo 'selected';
+                                                        } ?>><?php echo $rowcat['name']; ?></option>
+                                                        <?php
+                                                    }
 
                                                 ?>
 
@@ -93,16 +93,16 @@ include('sidebar.php');
                                                     placeholder="Sub Category">
                                                 <option selected disabled>Select</option>
                                                 <?php
-                                                if ($typeprod == "edit") {
-                                                    $prdsubcatid = $rowprodsedit['subcategoryid'];
-                                                    $sqlprdsubcat = "SELECT * FROM `005_omgss_subcategories` WHERE `id`='$prdsubcatid'";
-                                                    $resprdsubcat = mysqli_query($conn, $sqlprdsubcat);
-                                                    $rowprdsubcat = mysqli_fetch_assoc($resprdsubcat);
-                                                    ?>
-                                                    <option value="<?php echo $prdsubcatid; ?>"
-                                                            selected><?php echo $rowprdsubcat['subcatname']; ?></option>
-                                                    <?php
-                                                }
+                                                    if ($typeprod == "edit") {
+                                                        $prdsubcatid = $rowprodsedit['subcategoryid'];
+                                                        $sqlprdsubcat = "SELECT * FROM `005_omgss_subcategories` WHERE `id`='$prdsubcatid'";
+                                                        $resprdsubcat = mysqli_query($conn, $sqlprdsubcat);
+                                                        $rowprdsubcat = mysqli_fetch_assoc($resprdsubcat);
+                                                        ?>
+                                                        <option value="<?php echo $prdsubcatid; ?>"
+                                                                selected><?php echo $rowprdsubcat['subcatname']; ?></option>
+                                                        <?php
+                                                    }
                                                 ?>
 
 
@@ -133,13 +133,13 @@ include('sidebar.php');
                                             } ?> type="file" placeholder="Product Image"/>
 
                                             <?php
-                                            if ($typeprod == "edit") {
+                                                if ($typeprod == "edit") {
 
-                                                ?>
-                                                <img src="files/prod/<?php echo $rowprodsedit['image']; ?>"
-                                                     style="height:100px;width:100px">
-                                                <?php
-                                            }
+                                                    ?>
+                                                    <img src="files/prod/<?php echo $rowprodsedit['image']; ?>"
+                                                         style="height:100px;width:100px">
+                                                    <?php
+                                                }
                                             ?>
 
                                         </p>
@@ -157,39 +157,39 @@ include('sidebar.php');
                                                 <option value="" selected disabled>Select</option>
                                                 <option value="Nos" <?php if ($rowprodsedit['units'] == "Nos") {
                                                     echo 'selected';
-                                                }; ?>>Nos
+                                                } ?>>Nos
                                                 </option>
                                                 <option value="Ton" <?php if ($rowprodsedit['units'] == "Ton") {
                                                     echo 'selected';
-                                                }; ?>>Ton
+                                                } ?>>Ton
                                                 </option>
                                                 <option value="Sq. Ft." <?php if ($rowprodsedit['units'] == "Sq. Ft.") {
                                                     echo 'selected';
-                                                }; ?>>Sq. Ft.
+                                                } ?>>Sq. Ft.
                                                 </option>
                                                 <option value="Feet" <?php if ($rowprodsedit['units'] == "Feet") {
                                                     echo 'selected';
-                                                }; ?>>Feet
+                                                } ?>>Feet
                                                 </option>
                                                 <option value="Metre" <?php if ($rowprodsedit['units'] == "Metre") {
                                                     echo 'selected';
-                                                }; ?>>Metre
+                                                } ?>>Metre
                                                 </option>
                                                 <option value="kW" <?php if ($rowprodsedit['units'] == "kW") {
                                                     echo 'selected';
-                                                }; ?>>kW
+                                                } ?>>kW
                                                 </option>
                                                 <option value="HP" <?php if ($rowprodsedit['units'] == "HP") {
                                                     echo 'selected';
-                                                }; ?>>HP
+                                                } ?>>HP
                                                 </option>
                                                 <option value="Cubic Feet" <?php if ($rowprodsedit['units'] == "Cubic Feet") {
                                                     echo 'selected';
-                                                }; ?>>Cubic Feet
+                                                } ?>>Cubic Feet
                                                 </option>
                                                 <option value="Cubic Meter" <?php if ($rowprodsedit['units'] == "Cubic Meter") {
                                                     echo 'selected';
-                                                }; ?>>Cubic Meter
+                                                } ?>>Cubic Meter
                                                 </option>
                                             </select>
                                         </p>
@@ -217,11 +217,11 @@ include('sidebar.php');
                                                 <option value="">Select</option>
                                                 <option value="1" <?php if ($rowprodsedit['maintenancetype'] == 1) {
                                                     echo 'selected';
-                                                }; ?>>One Time Maintenance
+                                                } ?>>One Time Maintenance
                                                 </option>
                                                 <option value="2" <?php if ($rowprodsedit['maintenancetype'] == 2) {
                                                     echo 'selected';
-                                                }; ?>>Annual Maintenance
+                                                } ?>>Annual Maintenance
                                                 </option>
                                             </select>
                                         </p>
@@ -289,5 +289,5 @@ include('sidebar.php');
 
 
 <?php
-include('footer.php');
+    include('footer.php');
 ?>

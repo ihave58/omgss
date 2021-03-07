@@ -1,5 +1,5 @@
 <?php
-include('header.php');
+    include('header.php');
 ?>
     <style>
         .mapouter {
@@ -152,5 +152,5 @@ include('header.php');
 
 
 <?php
-include('footer.php');
+    include('footer.php');
 ?>

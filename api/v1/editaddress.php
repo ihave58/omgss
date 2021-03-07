@@ -1,6 +1,6 @@
 <?php
     include_once('../../include/db.php');
-
+    require("../../include/utils.php");
 
     if (empty($_POST['appid'])) {
         echo $response = json_encode(array('status' => 'error', 'message' => "Appid Can't be Empty"));
@@ -10,8 +10,8 @@
         echo $response = json_encode(array('status' => 'error', 'message' => "Token Can't be Empty"));
         exit;
     } else {
-        $urlid = $_POST['appid'];
-        $urltoken = $_POST['token'];
+        $urlid = runUserInputSanitizationHook($_POST['appid']);
+        $urltoken = runUserInputSanitizationHook($_POST['token']);
 
         $sql1 = "SELECT id FROM 003_omgss_api_tokens WHERE app_id='" . $urlid . "' AND app_token='" . $urltoken . "'";
         $results = mysqli_query($conn, $sql1);
@@ -33,14 +33,14 @@
 
     if ($method == 'POST') {
 
-        $addid = (isset($_POST['addid'])) ? $_POST['addid'] : '';
-        $addressprofilename = (isset($_POST['addressprofilename'])) ? $_POST['addressprofilename'] : '';
-        $fullname = (isset($_POST['fullname'])) ? $_POST['fullname'] : '';
-        $Email = (isset($_POST['Email'])) ? $_POST['Email'] : '';
-        $Address = (isset($_POST['Address'])) ? $_POST['Address'] : '';
-        $City = (isset($_POST['City'])) ? $_POST['City'] : '';
-        $State = (isset($_POST['State'])) ? $_POST['State'] : '';
-        $Zip = (isset($_POST['Zip'])) ? $_POST['Zip'] : '';
+        $addid = (isset($_POST['addid'])) ? runUserInputSanitizationHook($_POST['addid']) : '';
+        $addressprofilename = (isset($_POST['addressprofilename'])) ? runUserInputSanitizationHook($_POST['addressprofilename']) : '';
+        $fullname = (isset($_POST['fullname'])) ? runUserInputSanitizationHook($_POST['fullname']) : '';
+        $Email = (isset($_POST['Email'])) ? runUserInputSanitizationHook($_POST['Email']) : '';
+        $Address = (isset($_POST['Address'])) ? runUserInputSanitizationHook($_POST['Address']) : '';
+        $City = (isset($_POST['City'])) ? runUserInputSanitizationHook($_POST['City']) : '';
+        $State = (isset($_POST['State'])) ? runUserInputSanitizationHook($_POST['State']) : '';
+        $Zip = (isset($_POST['Zip'])) ? runUserInputSanitizationHook($_POST['Zip']) : '';
 
 
         if ((empty($addid)) || (empty($addressprofilename)) || (empty($fullname)) || (empty($Email)) || (empty($Address)) || (empty($City)) || (empty($State)) || (empty($Zip))) {

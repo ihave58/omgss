@@ -1,7 +1,7 @@
 ﻿<?php
-require_once("header.php");
-$chkpage = 15;
-require_once("sidebar.php");
+    require_once("header.php");
+    $chkpage = 15;
+    require_once("sidebar.php");
 
 
 ?>
@@ -40,54 +40,54 @@ require_once("sidebar.php");
                         <div class="card-content">
                             <div class="table-responsive">
                                 <?php
-                                if ($countnoti > 0) {
-                                    ?>
-                                    <table class="table table-striped table-bordered table-hover"
-                                           id="dataTables-example">
-                                        <thead>
-                                        <tr>
-                                            <th scope="col">Sl.</th>
-                                            <th scope="col">Notification</th>
-                                            <th scope="col">Notification Image</th>
-                                            <th scope="col">Edit</th>
-                                            <th scope="col">Delete</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
+                                    if ($countnoti > 0) {
+                                        ?>
+                                        <table class="table table-striped table-bordered table-hover"
+                                               id="dataTables-example">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Sl.</th>
+                                                <th scope="col">Notification</th>
+                                                <th scope="col">Notification Image</th>
+                                                <th scope="col">Edit</th>
+                                                <th scope="col">Delete</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            <?php
+                                                $countsl = 0;
+                                                while ($rownoti = mysqli_fetch_assoc($resnoti)) {
+                                                    $countsl++;
+                                                    ?>
+                                                    <tr class="odd gradeX">
+                                                        <td scope="row"><?php echo $countsl; ?></td>
+                                                        <td><?php echo $rownoti['description']; ?></td>
+                                                        <td><img src="files/noti/<?php echo $rownoti['image']; ?>"
+                                                                 style="height:20px;width:20px"></td>
+                                                        <td style="text-align:center"><a
+                                                                    href="addnotifications.php?notiid=<?php echo $rownoti['id'] ?>&typenoti=edit"><i
+                                                                        class="fa fa-edit" style="color:green"
+                                                                        aria-hidden="true"></i></a></td>
+                                                        <td style="text-align:center"><a
+                                                                    href="subfunction/deletenoti.php?id=<?php echo $rownoti['id'] ?>"
+                                                                    onclick="return confirm('Are you sure you want to delete this item?');"><i
+                                                                        class="fa fa-window-close" style="color:red"
+                                                                        aria-hidden="true"></i></a></td>
+                                                    </tr>
+                                                    <?php
+                                                }
+                                            ?>
+
+
+                                            </tbody>
+                                        </table>
 
                                         <?php
-                                        $countsl = 0;
-                                        while ($rownoti = mysqli_fetch_assoc($resnoti)) {
-                                            $countsl++;
-                                            ?>
-                                            <tr class="odd gradeX">
-                                                <td scope="row"><?php echo $countsl; ?></td>
-                                                <td><?php echo $rownoti['description']; ?></td>
-                                                <td><img src="files/noti/<?php echo $rownoti['image']; ?>"
-                                                         style="height:20px;width:20px"></td>
-                                                <td style="text-align:center"><a
-                                                            href="addnotifications.php?notiid=<?php echo $rownoti['id'] ?>&typenoti=edit"><i
-                                                                class="fa fa-edit" style="color:green"
-                                                                aria-hidden="true"></i></a></td>
-                                                <td style="text-align:center"><a
-                                                            href="subfunction/deletenoti.php?id=<?php echo $rownoti['id'] ?>"
-                                                            onclick="return confirm('Are you sure you want to delete this item?');"><i
-                                                                class="fa fa-window-close" style="color:red"
-                                                                aria-hidden="true"></i></a></td>
-                                            </tr>
-                                            <?php
-                                        }
-                                        ?>
 
-
-                                        </tbody>
-                                    </table>
-
-                                    <?php
-
-                                } else {
-                                    echo 'No record Exists !!!';
-                                }
+                                    } else {
+                                        echo 'No record Exists !!!';
+                                    }
 
                                 ?>
 
@@ -101,5 +101,5 @@ require_once("sidebar.php");
             </div>
 
 <?php
-require_once("footer.php");
+    require_once("footer.php");
 ?>

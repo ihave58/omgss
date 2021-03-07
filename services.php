@@ -1,5 +1,5 @@
 <?php
-include('header.php');
+    include('header.php');
 ?>
     <section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_2.jpg');"
              data-stellar-background-ratio="0.5">
@@ -26,7 +26,7 @@ include('header.php');
             </div>
             <div class="row">
                 <?php
-                $rowcat = mysqli_fetch_assoc($rescat);
+                    $rowcat = mysqli_fetch_assoc($rescat);
                 ?>
 
                 <div class="col-md-4 services ftco-animate">
@@ -45,7 +45,7 @@ include('header.php');
                     </div>
 
                     <?php
-                    $rowcat = mysqli_fetch_assoc($rescat);
+                        $rowcat = mysqli_fetch_assoc($rescat);
                     ?>
                     <div class="d-block d-flex">
                         <div class="icon d-flex justify-content-center align-items-center">
@@ -62,7 +62,7 @@ include('header.php');
 
                 </div>
                 <?php
-                $rowcat = mysqli_fetch_assoc($rescat);
+                    $rowcat = mysqli_fetch_assoc($rescat);
                 ?>
                 <div class="col-md-4 services ftco-animate">
                     <div class="d-block d-flex">
@@ -78,7 +78,7 @@ include('header.php');
                         </div>
                     </div>
                     <?php
-                    $rowcat = mysqli_fetch_assoc($rescat);
+                        $rowcat = mysqli_fetch_assoc($rescat);
                     ?>
                     <div class="d-block d-flex">
                         <div class="icon d-flex justify-content-center align-items-center">
@@ -94,7 +94,7 @@ include('header.php');
                     </div>
                 </div>
                 <?php
-                $rowcat = mysqli_fetch_assoc($rescat);
+                    $rowcat = mysqli_fetch_assoc($rescat);
                 ?>
                 <div class="col-md-4 services ftco-animate">
                     <div class="d-block d-flex">
@@ -110,7 +110,7 @@ include('header.php');
                         </div>
                     </div>
                     <?php
-                    $rowcat = mysqli_fetch_assoc($rescat);
+                        $rowcat = mysqli_fetch_assoc($rescat);
                     ?>
                     <div class="d-block d-flex">
                         <div class="icon d-flex justify-content-center align-items-center">
@@ -149,5 +149,5 @@ include('header.php');
     </section>
 
 <?php
-include('footer.php');
+    include('footer.php');
 ?>

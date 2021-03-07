@@ -1,11 +1,11 @@
 <?php
-include('header.php');
-include('sidebar.php');
+    include('header.php');
+    include('sidebar.php');
 ?>
 <?php
-if ($typecat != "edit") {
-    if ($countcat == 6) {
-        echo '<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    if ($typecat != "edit") {
+        if ($countcat == 6) {
+            echo '<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
                 
                           <link href="http://tristanedwards.me/u/SweetAlert/lib/sweet-alert.css" rel="stylesheet" />
 
@@ -33,8 +33,8 @@ if ($typecat != "edit") {
                        
                       </script>
                         ';
+        }
     }
-}
 
 ?>
 
@@ -130,5 +130,5 @@ if ($typecat != "edit") {
 
 
 <?php
-include('footer.php');
+    include('footer.php');
 ?>

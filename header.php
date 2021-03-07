@@ -1,10 +1,10 @@
 <?php
-session_start();
-include('include/db.php');
-include('include/keys.php');
-include('include/functions.php');
+    session_start();
+    include('include/db.php');
+    include('include/keys.php');
+    include('include/functions.php');
 
-header("X-Robots-Tag: noindex, nofollow", true);
+    header("X-Robots-Tag: noindex, nofollow", true);
 ?>
 
 
@@ -259,24 +259,24 @@ header("X-Robots-Tag: noindex, nofollow", true);
                     </div>
 
                     <?php
-                    if ($_SESSION["sessid"] == "") {
-                        ?>
-                        <div class="col">
-                            <div class="top-wrap d-flex">
-                                <div class="icon d-flex align-items-center justify-content-center"><span
-                                            class="fa fa-registered"></span></div>
-                                <a href="register.php" class="nav-link  headinganchors">Register</a>
+                        if ($_SESSION["sessid"] == "") {
+                            ?>
+                            <div class="col">
+                                <div class="top-wrap d-flex">
+                                    <div class="icon d-flex align-items-center justify-content-center"><span
+                                                class="fa fa-registered"></span></div>
+                                    <a href="register.php" class="nav-link  headinganchors">Register</a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col">
-                            <div class="top-wrap d-flex">
-                                <div class="icon d-flex align-items-center justify-content-center"><span
-                                            class="fa fa-sign-in"></span></div>
-                                <a href="login.php" class="nav-link  headinganchors">Login</a>
+                            <div class="col">
+                                <div class="top-wrap d-flex">
+                                    <div class="icon d-flex align-items-center justify-content-center"><span
+                                                class="fa fa-sign-in"></span></div>
+                                    <a href="login.php" class="nav-link  headinganchors">Login</a>
+                                </div>
                             </div>
-                        </div>
-                        <?php
-                    }
+                            <?php
+                        }
                     ?>
 
 
@@ -303,48 +303,48 @@ header("X-Robots-Tag: noindex, nofollow", true);
                         </div>
                     </div>
                     <?php
-                    if ($_SESSION["sessid"] != "") {
-                        ?>
-                        <div class="col">
-                            <div class="top-wrap d-flex">
-                                <div class="icon d-flex align-items-center justify-content-center"><span
-                                            class="fa fa-user"></span></div>
-                                <a href="myaccount.php" class="nav-link  headinganchors">My Account</a>
+                        if ($_SESSION["sessid"] != "") {
+                            ?>
+                            <div class="col">
+                                <div class="top-wrap d-flex">
+                                    <div class="icon d-flex align-items-center justify-content-center"><span
+                                                class="fa fa-user"></span></div>
+                                    <a href="myaccount.php" class="nav-link  headinganchors">My Account</a>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="col">
-                            <div class="top-wrap d-flex">
-                                <div class="icon d-flex align-items-center justify-content-center"><span
-                                            class="fa fa-mobile"></span></div>
-                                <a href="mydevices.php" class="nav-link  headinganchors">My Devices</a>
+                            <div class="col">
+                                <div class="top-wrap d-flex">
+                                    <div class="icon d-flex align-items-center justify-content-center"><span
+                                                class="fa fa-mobile"></span></div>
+                                    <a href="mydevices.php" class="nav-link  headinganchors">My Devices</a>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="col">
+                            <div class="col">
 
-                            <div class="top-wrap d-flex">
+                                <div class="top-wrap d-flex">
 
-                                <div class="icon d-flex align-items-center justify-content-center"><span
-                                            class="fa fa-user"></span></div>
-                                <a href="logout.php" class="nav-link  headinganchors">Logout</a>
-                                <!-- <?php echo $_SESSION["name"]; ?>  -->
+                                    <div class="icon d-flex align-items-center justify-content-center"><span
+                                                class="fa fa-user"></span></div>
+                                    <a href="logout.php" class="nav-link  headinganchors">Logout</a>
+                                    <!-- <?php echo $_SESSION["name"]; ?>  -->
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="col">
+                            <div class="col">
 
-                            <div class="top-wrap d-flex">
+                                <div class="top-wrap d-flex">
 
 
-                                <?php echo $_SESSION["name"]; ?> <br>
+                                    <?php echo $_SESSION["name"]; ?> <br>
 
-                                omgssusr<?php echo $_SESSION["sessid"]; ?>
+                                    omgssusr<?php echo $_SESSION["sessid"]; ?>
+                                </div>
                             </div>
-                        </div>
 
-                        <?php
-                    }
+                            <?php
+                        }
                     ?>
                     <div class="col">
 
@@ -384,28 +384,28 @@ header("X-Robots-Tag: noindex, nofollow", true);
 
 
                 <?php
-                while ($rowcath = mysqli_fetch_assoc($rescath)) {
-                    $categoryid = $rowcath['id'];
-                    $sqlcatnameh = "SELECT * FROM `005_omgss_subcategories` WHERE `catid`='$categoryid'";
-                    $rescatnameh = mysqli_query($conn, $sqlcatnameh);
+                    while ($rowcath = mysqli_fetch_assoc($rescath)) {
+                        $categoryid = $rowcath['id'];
+                        $sqlcatnameh = "SELECT * FROM `005_omgss_subcategories` WHERE `catid`='$categoryid'";
+                        $rescatnameh = mysqli_query($conn, $sqlcatnameh);
 
-                    ?>
-                    <li class="nav-item"><a href="moreservices.php?catid=<?php echo $rowcath['id']; ?>"
-                                            class="nav-link"><?php echo $rowcath['name']; ?></a>
-                        <div class="dropdown-content">
-                            <?php
-                            while ($rowcatnameh = mysqli_fetch_assoc($rescatnameh)) {
-                                ?>
-                                <a href="products.php?scatid=<?php echo $rowcatnameh['id']; ?>"><?php echo $rowcatnameh['subcatname']; ?></a>
+                        ?>
+                        <li class="nav-item"><a href="moreservices.php?catid=<?php echo $rowcath['id']; ?>"
+                                                class="nav-link"><?php echo $rowcath['name']; ?></a>
+                            <div class="dropdown-content">
                                 <?php
-                            }
-                            ?>
+                                    while ($rowcatnameh = mysqli_fetch_assoc($rescatnameh)) {
+                                        ?>
+                                        <a href="products.php?scatid=<?php echo $rowcatnameh['id']; ?>"><?php echo $rowcatnameh['subcatname']; ?></a>
+                                        <?php
+                                    }
+                                ?>
 
 
-                        </div>
-                    </li>
-                    <?php
-                }
+                            </div>
+                        </li>
+                        <?php
+                    }
                 ?>
 
 
@@ -466,85 +466,48 @@ header("X-Robots-Tag: noindex, nofollow", true);
 
 
         <?php
-        if ($loggeduserid != "") {
-            if ($countnotiuserfr > 0) {
-                ?>
-                <table>
-                    <tbody>
-                    <?php
-
-                    while ($rownotiuserfr = mysqli_fetch_assoc($resnotiuserfr)) {
-
-                        $notitypechk = $rownotiuserfr['notificationid'];
-                        if ($notitypechk == "system") {
-                            ?>
-                            <tr>
-                                <td><img src="images/<?php echo $rownotiuserfr['image']; ?>"
-                                         style="height:50px;width:50px"></td>
-                                <td><?php echo substr(strip_tags($rownotiuserfr['content']), 0, 1000); ?></td>
-                            </tr>
-                            <?php
-                        } else {
-                            $sqlnotifromtb = "SELECT * FROM `005_omgss_notifications` WHERE `id`='$notitypechk'";
-                            $resnotifromtb = mysqli_query($conn, $sqlnotifromtb);
-                            $rownotifromtb = mysqli_fetch_assoc($resnotifromtb);
-                            ?>
-                            <tr>
-                                <td><img src="admin/files/noti/<?php echo $rownotifromtb['image']; ?>"
-                                         style="height:50px;width:50px"></td>
-                                <td><?php echo substr(strip_tags($rownotifromtb['description']), 0, 1000); ?></td>
-                            </tr>
-
-                            <?php
-                        }
-
-
-                    }
+            if ($loggeduserid != "") {
+                if ($countnotiuserfr > 0) {
                     ?>
-
-                    </tbody>
-                </table>
-
-                <?php
-            } else {
-                echo '<table>
-				    	<tbody>
-						<tr>
-								    			<td><img src="images/exclain.png" style="height:50px;width:50px"></td>
-								    			<td>Sorry no notifications available at this moment.</td>
-							    			</tr>
-						</tbody>
-				    </table>';
-            }
-        } else {
-
-            if ($countnoti23 > 0) {
-                ?>
-                <table>
-                    <tbody>
-                    <?php
-
-                    while ($rownoti23 = mysqli_fetch_assoc($resnoti23)) {
-
-                        ?>
-                        <tr>
-                            <td><img src="admin/files/noti/<?php echo $rownoti23['image']; ?>"
-                                     style="height:50px;width:50px"></td>
-                            <td><?php echo substr(strip_tags($rownoti23['description']), 0, 1000); ?></td>
-                        </tr>
-
+                    <table>
+                        <tbody>
                         <?php
 
+                            while ($rownotiuserfr = mysqli_fetch_assoc($resnotiuserfr)) {
 
-                    }
-                    ?>
+                                $notitypechk = $rownotiuserfr['notificationid'];
+                                if ($notitypechk == "system") {
+                                    ?>
+                                    <tr>
+                                        <td><img src="images/<?php echo $rownotiuserfr['image']; ?>"
+                                                 style="height:50px;width:50px"></td>
+                                        <td><?php echo substr(strip_tags($rownotiuserfr['content']), 0, 1000); ?></td>
+                                    </tr>
+                                    <?php
+                                } else {
+                                    $sqlnotifromtb = "SELECT * FROM `005_omgss_notifications` WHERE `id`='$notitypechk'";
+                                    $resnotifromtb = mysqli_query($conn, $sqlnotifromtb);
+                                    $rownotifromtb = mysqli_fetch_assoc($resnotifromtb);
+                                    ?>
+                                    <tr>
+                                        <td><img src="admin/files/noti/<?php echo $rownotifromtb['image']; ?>"
+                                                 style="height:50px;width:50px"></td>
+                                        <td><?php echo substr(strip_tags($rownotifromtb['description']), 0, 1000); ?></td>
+                                    </tr>
 
-                    </tbody>
-                </table>
+                                    <?php
+                                }
 
-                <?php
-            } else {
-                echo '<table>
+
+                            }
+                        ?>
+
+                        </tbody>
+                    </table>
+
+                    <?php
+                } else {
+                    echo '<table>
 				    	<tbody>
 						<tr>
 								    			<td><img src="images/exclain.png" style="height:50px;width:50px"></td>
@@ -552,8 +515,45 @@ header("X-Robots-Tag: noindex, nofollow", true);
 							    			</tr>
 						</tbody>
 				    </table>';
+                }
+            } else {
+
+                if ($countnoti23 > 0) {
+                    ?>
+                    <table>
+                        <tbody>
+                        <?php
+
+                            while ($rownoti23 = mysqli_fetch_assoc($resnoti23)) {
+
+                                ?>
+                                <tr>
+                                    <td><img src="admin/files/noti/<?php echo $rownoti23['image']; ?>"
+                                             style="height:50px;width:50px"></td>
+                                    <td><?php echo substr(strip_tags($rownoti23['description']), 0, 1000); ?></td>
+                                </tr>
+
+                                <?php
+
+
+                            }
+                        ?>
+
+                        </tbody>
+                    </table>
+
+                    <?php
+                } else {
+                    echo '<table>
+				    	<tbody>
+						<tr>
+								    			<td><img src="images/exclain.png" style="height:50px;width:50px"></td>
+								    			<td>Sorry no notifications available at this moment.</td>
+							    			</tr>
+						</tbody>
+				    </table>';
+                }
             }
-        }
 
         ?>
 

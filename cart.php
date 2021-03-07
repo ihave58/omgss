@@ -1,5 +1,5 @@
 <?php
-include('header.php');
+    include('header.php');
 
 ?>
 
@@ -462,137 +462,140 @@ include('header.php');
         </header>
         <div id="page">
             <?php
-            if ($countallcart > 0) {
-                ?>
-                <table id="cart">
-                    <thead style="text-align: center;">
-                    <tr>
-                        <th class="first">Service Image</th>
-                        <th class="second">Qty/Unit</th>
-                        <th class="third">Service Name</th>
-                        <th class="fourth">Total</th>
-                        <th class="fourth">Move To Wishlist</th>
-                        <th class="fifth">&nbsp;</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <!-- shopping cart contents -->
-
-
-                    <?php
-                    $carttotal = 0;
-                    while ($rowallcart = mysqli_fetch_assoc($rescountallcart)) {
-                        $productidcart = $rowallcart['prdid'];
-                        $sqlechprd = "SELECT * FROM `005_omgss_products` WHERE `id`='$productidcart'";
-                        $resechprd = mysqli_query($conn, $sqlechprd);
-                        $rowechprd = mysqli_fetch_assoc($resechprd);
-                        $carttotal = $carttotal + $rowechprd['saleprice'] * $rowallcart['quantity'];
-                        ?>
-                        <tr class="productitm">
-                            <!-- http://www.inkydeals.com/deal/ginormous-bundle/ -->
-                            <td><img src="admin/files/prod/<?php echo $rowechprd['image']; ?>" class="thumb cartwish"
-                                     style=""></td>
-                            <td><!-- <input type="number" value="" min="1" max="99" class="qtyinput"> --><a
-                                        class="plusminus"
-                                        href="subfunctions/quantitychangecart.php?id=<?php echo $rowallcart['id']; ?>&action=minus"
-                                        style="    line-height: initial;border: none;"
-                                        id="plus<?php echo $rowallcart['id']; ?>">-</a>
-                                <span><?php echo $rowallcart['quantity']; ?></span> <a class="plusminus"
-                                                                                       href="subfunctions/quantitychangecart.php?id=<?php echo $rowallcart['id']; ?>&action=plus"
-                                                                                       style="    line-height: initial;border: none;"
-                                                                                       id="minus<?php echo $rowallcart['id']; ?>">+</a> <?php echo $rowechprd['units']; ?>
-                            </td>
-                            <td><?php echo $rowechprd['name']; ?></td>
-                            <td>Rs. <?php echo $rowechprd['saleprice'] * $rowallcart['quantity']; ?></td>
-                            <td><a href="subfunctions/movetowishlist.php?id=<?php echo $rowallcart['id']; ?>"><i
-                                            class="fa fa-heart" aria-hidden="true" style="color:blue"></i></a></td>
-                            <td><a href="subfunctions/delcart.php?id=<?php echo $rowallcart['id']; ?>"
-                                   onclick="return confirm('Are you sure you want to delete this item')"><span
-                                            class="remove"><i class="fa fa-trash"
-                                                              style="    font-size: x-large;color:red"
-                                                              aria-hidden="true"></i></span></a></td>
+                if ($countallcart > 0) {
+                    ?>
+                    <table id="cart">
+                        <thead style="text-align: center;">
+                        <tr>
+                            <th class="first">Service Image</th>
+                            <th class="second">Qty/Unit</th>
+                            <th class="third">Service Name</th>
+                            <th class="fourth">Total</th>
+                            <th class="fourth">Move To Wishlist</th>
+                            <th class="fifth">&nbsp;</th>
                         </tr>
+                        </thead>
+                        <tbody>
+                        <!-- shopping cart contents -->
+
+
                         <?php
-                    }
-                    ?>
-
-
-
-
-
-
-                    <?php
-                    $tax = (float)($carttotal * (18 / 100));
-                    $carttotalwithtax = (float)($carttotal + $tax) - $_SESSION['coupdisc'];
-                    ?>
-
-                    <!-- tax + subtotal -->
-                    <tr class="extracosts">
-                        <td class="light"> Sub-Total</td>
-                        <td colspan="2" class="light"></td>
-                        <td>Rs. <?php echo number_format($carttotal, 2); ?></td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr class="extracosts">
-                        <td class="light"> Taxes (18%)</td>
-                        <td colspan="2" class="light"></td>
-                        <td>Rs. <?php echo number_format($tax, 2); ?></td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <?php
-                    if ($_SESSION['coupidfrsv']) {
+                            $carttotal = 0;
+                            while ($rowallcart = mysqli_fetch_assoc($rescountallcart)) {
+                                $productidcart = $rowallcart['prdid'];
+                                $sqlechprd = "SELECT * FROM `005_omgss_products` WHERE `id`='$productidcart'";
+                                $resechprd = mysqli_query($conn, $sqlechprd);
+                                $rowechprd = mysqli_fetch_assoc($resechprd);
+                                $carttotal = $carttotal + $rowechprd['saleprice'] * $rowallcart['quantity'];
+                                ?>
+                                <tr class="productitm">
+                                    <!-- http://www.inkydeals.com/deal/ginormous-bundle/ -->
+                                    <td><img src="admin/files/prod/<?php echo $rowechprd['image']; ?>"
+                                             class="thumb cartwish"
+                                             style=""></td>
+                                    <td><!-- <input type="number" value="" min="1" max="99" class="qtyinput"> --><a
+                                                class="plusminus"
+                                                href="subfunctions/quantitychangecart.php?id=<?php echo $rowallcart['id']; ?>&action=minus"
+                                                style="    line-height: initial;border: none;"
+                                                id="plus<?php echo $rowallcart['id']; ?>">-</a>
+                                        <span><?php echo $rowallcart['quantity']; ?></span> <a class="plusminus"
+                                                                                               href="subfunctions/quantitychangecart.php?id=<?php echo $rowallcart['id']; ?>&action=plus"
+                                                                                               style="    line-height: initial;border: none;"
+                                                                                               id="minus<?php echo $rowallcart['id']; ?>">+</a> <?php echo $rowechprd['units']; ?>
+                                    </td>
+                                    <td><?php echo $rowechprd['name']; ?></td>
+                                    <td>Rs. <?php echo $rowechprd['saleprice'] * $rowallcart['quantity']; ?></td>
+                                    <td><a href="subfunctions/movetowishlist.php?id=<?php echo $rowallcart['id']; ?>"><i
+                                                    class="fa fa-heart" aria-hidden="true" style="color:blue"></i></a>
+                                    </td>
+                                    <td><a href="subfunctions/delcart.php?id=<?php echo $rowallcart['id']; ?>"
+                                           onclick="return confirm('Are you sure you want to delete this item')"><span
+                                                    class="remove"><i class="fa fa-trash"
+                                                                      style="    font-size: x-large;color:red"
+                                                                      aria-hidden="true"></i></span></a></td>
+                                </tr>
+                                <?php
+                            }
                         ?>
+
+
+
+
+
+
+                        <?php
+                            $tax = (float)($carttotal * (18 / 100));
+                            $carttotalwithtax = (float)($carttotal + $tax) - $_SESSION['coupdisc'];
+                        ?>
+
+                        <!-- tax + subtotal -->
                         <tr class="extracosts">
-                            <td class="light"> Discount (<?php echo $_SESSION['disccouptypesh']; ?>)</td>
+                            <td class="light"> Sub-Total</td>
                             <td colspan="2" class="light"></td>
-                            <td>Rs. <?php echo number_format($_SESSION['coupdisc'], 2); ?></td>
+                            <td>Rs. <?php echo number_format($carttotal, 2); ?></td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr class="extracosts">
+                            <td class="light"> Taxes (18%)</td>
+                            <td colspan="2" class="light"></td>
+                            <td>Rs. <?php echo number_format($tax, 2); ?></td>
                             <td>&nbsp;</td>
                         </tr>
                         <?php
-                    }
-                    ?>
+                            if ($_SESSION['coupidfrsv']) {
+                                ?>
+                                <tr class="extracosts">
+                                    <td class="light"> Discount (<?php echo $_SESSION['disccouptypesh']; ?>)</td>
+                                    <td colspan="2" class="light"></td>
+                                    <td>Rs. <?php echo number_format($_SESSION['coupdisc'], 2); ?></td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <?php
+                            }
+                        ?>
 
 
-                    <tr class="totalprice">
-                        <td class="light">Total:</td>
-                        <td colspan="2">&nbsp;</td>
-                        <td colspan="2"><span
-                                    class="thick">Rs. <?php echo number_format($carttotalwithtax, 2); ?></span></td>
-                    </tr>
+                        <tr class="totalprice">
+                            <td class="light">Total:</td>
+                            <td colspan="2">&nbsp;</td>
+                            <td colspan="2"><span
+                                        class="thick">Rs. <?php echo number_format($carttotalwithtax, 2); ?></span></td>
+                        </tr>
 
-                    <!-- checkout btn -->
-                    <tr class="checkoutrow">
-                        <td colspan="5" class="checkout">
+                        <!-- checkout btn -->
+                        <tr class="checkoutrow">
+                            <td colspan="5" class="checkout">
 
-                            <form method="post">
-                                <input type="text" value="<?php echo $carttotal; ?>" name="totalvalue" hidden>
-                                <input type="text" value="" class="couponcodefr form-control"
-                                       style="display: initial;width: 15%;    height: 37px !important;"
-                                       name="couponcodefr" required placeholder="Enter Your Coupon">
-                                <button type="submit" name="couponapply" id="submitbtn">Apply!</button>
-                                <button type="button" class="btn btn-primary" id="couponbtn">Coupons</button>
-                            </form>
-
-
-                        </td>
-                    </tr>
-                    <tr class="checkoutrow">
-                        <td colspan="5" class="checkout">
-
-                            <form method="post">
-                                <input type="text" value="<?php echo $carttotalwithtax; ?>" name="totalvalue" hidden>
-                                <button type="submit" name="cartsubmitbtn" id="submitbtn">Checkout Now!</button>
-                            </form>
+                                <form method="post">
+                                    <input type="text" value="<?php echo $carttotal; ?>" name="totalvalue" hidden>
+                                    <input type="text" value="" class="couponcodefr form-control"
+                                           style="display: initial;width: 15%;    height: 37px !important;"
+                                           name="couponcodefr" required placeholder="Enter Your Coupon">
+                                    <button type="submit" name="couponapply" id="submitbtn">Apply!</button>
+                                    <button type="button" class="btn btn-primary" id="couponbtn">Coupons</button>
+                                </form>
 
 
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-                <?php
-            } else {
-                echo '<h3 style="color:red">No items to display</h3>';
-            }
+                            </td>
+                        </tr>
+                        <tr class="checkoutrow">
+                            <td colspan="5" class="checkout">
+
+                                <form method="post">
+                                    <input type="text" value="<?php echo $carttotalwithtax; ?>" name="totalvalue"
+                                           hidden>
+                                    <button type="submit" name="cartsubmitbtn" id="submitbtn">Checkout Now!</button>
+                                </form>
+
+
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <?php
+                } else {
+                    echo '<h3 style="color:red">No items to display</h3>';
+                }
             ?>
         </div>
     </div>
@@ -605,44 +608,44 @@ include('header.php');
             <button type="button" class="btn cancel" onclick="closeForm()" style="    width: 5%;padding: 4px;">X
             </button>
             <?php
-            if ($countcoupshfr > 0) {
-                ?>
-                <div style="padding: 25px;">
-                    <?php
-                    while ($rowcoupshfr = mysqli_fetch_assoc($rescoupshfr)) {
-                        ?>
-                        <p style="width: max-content;">
-                            <?php if ($rowcoupshfr['coupontype'] == 1) {
-                                echo $rowcoupshfr['couponamount'] . '% discount on Total. Can be used ' . $rowcoupshfr['usageperuser'] . ' times per user.';
+                if ($countcoupshfr > 0) {
+                    ?>
+                    <div style="padding: 25px;">
+                        <?php
+                            while ($rowcoupshfr = mysqli_fetch_assoc($rescoupshfr)) {
                                 ?>
+                                <p style="width: max-content;">
+                                    <?php if ($rowcoupshfr['coupontype'] == 1) {
+                                        echo $rowcoupshfr['couponamount'] . '% discount on Total. Can be used ' . $rowcoupshfr['usageperuser'] . ' times per user.';
+                                        ?>
 
-                                Code:  <span style="color:blue"
-                                             id="p1<?php echo $rowcoupshfr['id']; ?>"><?php echo $rowcoupshfr['couponcode']; ?></span>
-                                <a href="javascript:void(0)" style="color: white;background: #007bff;"
-                                   onclick="copyToClipboard('#p1<?php echo $rowcoupshfr['id']; ?>')">Copy</a>
+                                        Code:  <span style="color:blue"
+                                                     id="p1<?php echo $rowcoupshfr['id']; ?>"><?php echo $rowcoupshfr['couponcode']; ?></span>
+                                        <a href="javascript:void(0)" style="color: white;background: #007bff;"
+                                           onclick="copyToClipboard('#p1<?php echo $rowcoupshfr['id']; ?>')">Copy</a>
 
-                                <?php
-                            } else {
-                                echo $rowcoupshfr['couponamount'] . ' flat discount on Total. Can be used ' . $rowcoupshfr['usageperuser'] . ' times per user.';
-                                ?>
-                                Code:  <span style="color:blue"
-                                             id="p1<?php echo $rowcoupshfr['id']; ?>"><?php echo $rowcoupshfr['couponcode']; ?></span>
-                                <a href="javascript:void(0)" style="color: white;background: #007bff;"
-                                   onclick="copyToClipboard('#p1<?php echo $rowcoupshfr['id']; ?>')">Copy</a>
+                                        <?php
+                                    } else {
+                                        echo $rowcoupshfr['couponamount'] . ' flat discount on Total. Can be used ' . $rowcoupshfr['usageperuser'] . ' times per user.';
+                                        ?>
+                                        Code:  <span style="color:blue"
+                                                     id="p1<?php echo $rowcoupshfr['id']; ?>"><?php echo $rowcoupshfr['couponcode']; ?></span>
+                                        <a href="javascript:void(0)" style="color: white;background: #007bff;"
+                                           onclick="copyToClipboard('#p1<?php echo $rowcoupshfr['id']; ?>')">Copy</a>
+                                        <?php
+                                    }
+                                    ?>
+
+                                </p>
+                                <p></p>
                                 <?php
                             }
-                            ?>
-
-                        </p>
-                        <p></p>
-                        <?php
-                    }
-                    ?>
-                </div>
-                <?php
-            } else {
-                echo '<div style="padding: 50px;"><p>Sorry, No Coupons Available</p></div>';
-            }
+                        ?>
+                    </div>
+                    <?php
+                } else {
+                    echo '<div style="padding: 50px;"><p>Sorry, No Coupons Available</p></div>';
+                }
             ?>
 
 
@@ -687,5 +690,5 @@ include('header.php');
     </script>
 
 <?php
-include('footer.php');
+    include('footer.php');
 ?>

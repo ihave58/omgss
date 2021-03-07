@@ -1,6 +1,6 @@
 <?php
     include_once('../../include/db.php');
-
+    require("../../include/utils.php");
 
     if (empty($_POST['appid'])) {
         echo $response = json_encode(array('status' => 'error', 'message' => "Appid Can't be Empty"));
@@ -10,8 +10,8 @@
         echo $response = json_encode(array('status' => 'error', 'message' => "Token Can't be Empty"));
         exit;
     } else {
-        $urlid = $_POST['appid'];
-        $urltoken = $_POST['token'];
+        $urlid = runUserInputSanitizationHook($_POST['appid']);
+        $urltoken = runUserInputSanitizationHook($_POST['token']);
 
         $sql1 = "SELECT id FROM 003_omgss_api_tokens WHERE app_id='" . $urlid . "' AND app_token='" . $urltoken . "'";
         $results = mysqli_query($conn, $sql1);
@@ -32,13 +32,13 @@
     $method = $_SERVER['REQUEST_METHOD'];
 
     if ($method == 'POST') {
-        $service = (isset($_POST['service'])) ? $_POST['service'] : '';
-        $name = (isset($_POST['name'])) ? $_POST['name'] : '';
-        $phone = (isset($_POST['phone'])) ? $_POST['phone'] : '';
-        $date = (isset($_POST['date'])) ? $_POST['date'] : '';
-        $time = (isset($_POST['time'])) ? $_POST['time'] : '';
-        $reason = (isset($_POST['reason'])) ? $_POST['reason'] : '';
-        $message = (isset($_POST['message'])) ? $_POST['message'] : '';
+        $service = (isset($_POST['service'])) ? runUserInputSanitizationHook($_POST['service']) : '';
+        $name = (isset($_POST['name'])) ? runUserInputSanitizationHook($_POST['name']) : '';
+        $phone = (isset($_POST['phone'])) ? runUserInputSanitizationHook($_POST['phone']) : '';
+        $date = (isset($_POST['date'])) ? runUserInputSanitizationHook($_POST['date']) : '';
+        $time = (isset($_POST['time'])) ? runUserInputSanitizationHook($_POST['time']) : '';
+        $reason = (isset($_POST['reason'])) ? runUserInputSanitizationHook($_POST['reason']) : '';
+        $message = (isset($_POST['message'])) ? runUserInputSanitizationHook($_POST['message']) : '';
 
 
         if (empty($name) || empty($phone) || empty($reason) || empty($message)) {

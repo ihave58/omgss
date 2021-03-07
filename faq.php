@@ -1,5 +1,5 @@
 <?php
-include('header.php');
+    include('header.php');
 ?>
     <style>
         .collapsible {
@@ -52,22 +52,22 @@ include('header.php');
 
 
                             <?php
-                            if ($countfaq > 0) {
-                                while ($rowfaq = mysqli_fetch_assoc($resfaq)) {
+                                if ($countfaq > 0) {
+                                    while ($rowfaq = mysqli_fetch_assoc($resfaq)) {
 
-                                    ?>
-
-
-                                    <button type="button"
-                                            class="collapsible"><?php echo $rowfaq['question']; ?></button>
-                                    <div class="content">
-                                        <p><?php echo $rowfaq['answer']; ?></p>
-                                    </div>
+                                        ?>
 
 
-                                    <?php
+                                        <button type="button"
+                                                class="collapsible"><?php echo $rowfaq['question']; ?></button>
+                                        <div class="content">
+                                            <p><?php echo $rowfaq['answer']; ?></p>
+                                        </div>
+
+
+                                        <?php
+                                    }
                                 }
-                            }
                             ?>
 
 
@@ -98,5 +98,5 @@ include('header.php');
 
 
 <?php
-include('footer.php');
+    include('footer.php');
 ?>

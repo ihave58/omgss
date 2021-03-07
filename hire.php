@@ -1,5 +1,5 @@
 <?php
-include('header.php');
+    include('header.php');
 ?>
     <section class="ftco-appointment ftco-section ftco-no-pt ftco-no-pb img"
              style="background-image: url(images/Hire-Soshable.jpg);">
@@ -19,11 +19,11 @@ include('header.php');
                                             <select name="service" id="" class="form-control">
                                                 <option value="" selected disabled>Select services</option>
                                                 <?php
-                                                while ($rowcat = mysqli_fetch_assoc($rescat)) {
-                                                    ?>
-                                                    <option value="<?php echo $rowcat['name']; ?>"><?php echo $rowcat['name']; ?></option>
-                                                    <?php
-                                                }
+                                                    while ($rowcat = mysqli_fetch_assoc($rescat)) {
+                                                        ?>
+                                                        <option value="<?php echo $rowcat['name']; ?>"><?php echo $rowcat['name']; ?></option>
+                                                        <?php
+                                                    }
                                                 ?>
 
 
@@ -89,5 +89,5 @@ include('header.php');
         </div>
     </section>
 <?php
-include('footer.php');
+    include('footer.php');
 ?>

@@ -1,7 +1,7 @@
 ﻿<?php
-require_once("header.php");
-$chkpage = 1;
-require_once("sidebar.php");
+    require_once("header.php");
+    $chkpage = 1;
+    require_once("sidebar.php");
 ?>
 
     <style>
@@ -166,5 +166,5 @@ require_once("sidebar.php");
 
 
 <?php
-require_once("footer.php");
+    require_once("footer.php");
 ?>

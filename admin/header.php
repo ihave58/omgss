@@ -1,13 +1,13 @@
 <?php
-session_start();
-if (empty($_SESSION['idsessuser'])) {
-    header("Location: index.php");
-}
-header("Cache-Control: no-cache, must-revalidate");
+    session_start();
+    if (empty($_SESSION['idsessuser'])) {
+        header("Location: index.php");
+    }
+    header("Cache-Control: no-cache, must-revalidate");
 
-include('../include/db.php');
-include('../include/functions.php');
-include('../include/keys.php');
+    include('../include/db.php');
+    include('../include/functions.php');
+    include('../include/keys.php');
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
