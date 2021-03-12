@@ -1,5 +1,6 @@
 <?php
-
+    require("../../include/utils.php");
+    
     session_start();
     include('../../include/db.php');
     error_reporting(0);

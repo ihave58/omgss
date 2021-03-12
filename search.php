@@ -1,5 +1,7 @@
 <?php
     include('header.php');
+    require("./include/utils.php");
+    
     $searchtext = runUserInputSanitizationHook($_POST['searchtext']);
     if ($searchtext) {
         $sqlsearch = "SELECT * FROM `005_omgss_subcategories` WHERE `subcatname` LIKE '%$searchtext%'";

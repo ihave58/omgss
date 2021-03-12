@@ -1,4 +1,5 @@
 <?php
+    require("./include/utils.php");
     require('razorpay/config.php');
     require('razorpay/razorpay-php/Razorpay.php');
 

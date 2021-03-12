@@ -1,5 +1,6 @@
 <?php
     include('../include/db.php');
+    require("../include/utils.php");
     $id = runUserInputSanitizationHook($_GET['id']);
     $sql = "SELECT * FROM `005_omgss_wishlist` WHERE `id`='$id'";
     $res = mysqli_query($conn, $sql);

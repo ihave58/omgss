@@ -1,4 +1,5 @@
 <?php
+    require("../../include/utils.php");
 
     if (isset($_POST['btnsublogin'])) {
         $username = runUserInputSanitizationHook($_POST['username']);

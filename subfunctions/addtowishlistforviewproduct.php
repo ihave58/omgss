@@ -2,6 +2,7 @@
     session_start();
     error_reporting(0);
     include('../include/db.php');
+    require("../include/utils.php");
     if (isset($_POST['action']) && runUserInputSanitizationHook($_POST['action']) == 'alertquerydf') {
 
 

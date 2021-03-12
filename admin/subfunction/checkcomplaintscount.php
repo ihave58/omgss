@@ -1,6 +1,7 @@
 <?php
     session_start();
     error_reporting(0);
+    require("../../include/utils.php");
     include('../../include/db.php');
     if (isset($_POST['action']) && runUserInputSanitizationHook($_POST['action']) == 'alertqueryd3') {
         $sql = "SELECT * FROM `005_omgss_complaints` WHERE `countnotify`='No'";

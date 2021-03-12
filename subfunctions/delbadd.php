@@ -1,5 +1,6 @@
 <?php
     session_start();
+    require("../include/utils.php");
     if ($_SESSION["sessid"] == "") {
         echo '<script>window.location.href="../index.php";</script>';
         die;

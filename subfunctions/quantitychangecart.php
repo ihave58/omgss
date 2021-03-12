@@ -1,5 +1,6 @@
 <?php
     include('../include/db.php');
+    require("../include/utils.php");
     $id = runUserInputSanitizationHook($_GET['id']);
     $action = runUserInputSanitizationHook($_GET['action']);
 

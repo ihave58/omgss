@@ -25,7 +25,6 @@
                 <div class="col-md-12 pl-md-5">
                     <div class="row justify-content-start py-5">
                         <div class="col-md-12 heading-section ftco-animate">
-
                             <?php echo $rowabout['textterms']; ?>
 
                         </div>

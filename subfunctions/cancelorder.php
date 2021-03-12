@@ -1,6 +1,7 @@
 <?php
     session_start();
     $loggeduserid = $_SESSION["sessid"];
+    require("../include/utils.php");
     include('../include/db.php');
     require('../razorpay/config.php');
     require('../razorpay/razorpay-php/Razorpay.php');
