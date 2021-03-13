@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Aug 21, 2020 at 05:51 PM
--- Server version: 10.4.13-MariaDB
--- PHP Version: 7.2.32
+-- Generation Time: Mar 13, 2021 at 01:22 PM
+-- Server version: 10.4.14-MariaDB-cll-lve
+-- PHP Version: 7.2.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `u405794923_omgssdb`
+-- Database: `u405794923_omgss_corephp`
 --
 
 -- --------------------------------------------------------
@@ -29,18 +29,11 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `003_omgss_api_tokens` (
-  `id` int(11) NOT NULL,
-  `app` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
   `app_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `app_token` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `app_token` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `create_time` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `003_omgss_api_tokens`
---
-
-INSERT INTO `003_omgss_api_tokens` (`id`, `app`, `app_id`, `app_token`) VALUES
-(1, 'Android', 'androidomgss9436', 'e528d06aa603e7411dd84094d24d7736');
 
 -- --------------------------------------------------------
 
@@ -56,24 +49,6 @@ CREATE TABLE `003_omgss_devices` (
   `orderid` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `datetime` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `003_omgss_devices`
---
-
-INSERT INTO `003_omgss_devices` (`id`, `userid`, `productid`, `quantity`, `orderid`, `datetime`) VALUES
-(3, '1', '2', '1', '6', '2020-07-22 12:38:57'),
-(4, '1', '18', '1', '6', '2020-07-22 12:38:57'),
-(5, '3', '18', '1', '2', '2020-07-25 08:56:08'),
-(6, '3', '1', '1', '10', '2020-08-08 07:59:03'),
-(7, '2', '21', '1', '15', '2020-08-09 13:38:11'),
-(8, '5', '32', '1', '17', '2020-08-10 09:28:48'),
-(9, '5', '32', '1', '16', '2020-08-10 09:28:54'),
-(15, '3', '2', '1', '31', '2020-08-18 16:13:57'),
-(16, '3', '1', '1', '31', '2020-08-18 16:13:57'),
-(17, '1', '1', '1', '29', '2020-08-18 16:14:12'),
-(18, '2', '2', '1', '36', '2020-08-19 05:37:53'),
-(19, '1', '2', '2', '35', '2020-08-19 06:07:46');
 
 -- --------------------------------------------------------
 
@@ -131,17 +106,6 @@ CREATE TABLE `005_omgss_billingaddresses` (
   `Zip` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `005_omgss_billingaddresses`
---
-
-INSERT INTO `005_omgss_billingaddresses` (`id`, `userid`, `addressprofilename`, `fullname`, `Email`, `Address`, `City`, `State`, `Zip`) VALUES
-(3, '1', 'dffgdhffjghjg1111', 'asdadff1111', 'scasaxsx1111', 'rterter1111', 'adsdas1111', 'asdasd1111', 'sxsxsx111'),
-(7, '4', 'Delhi', 'kkrk', 'krupinder95@gmail.com', 'B 100', 'New Delhi', 'Delhi', '110028'),
-(8, '2', 'Home', 'ASHISH DIXIT', 'ashishdixit117@gmail.com', '35/16, Behind Chitrakot Parisar,Harshit Nagar', 'Raipur', 'Chhattisgarh', '492099'),
-(9, '3', 'Home', 'Navjot', 'navii.singh01@gmail.com', 'H-78', 'New Delhi', 'Delhi', '110092'),
-(10, '5', 'Abhishek  Sinha', 'Abhishek Kumar Sinha', 'aks.jan20@gmail.com', 'B/3-7/A Dhebar City Bhatagaon', 'Raipur', 'Chhattisgarh', '492001');
-
 -- --------------------------------------------------------
 
 --
@@ -155,13 +119,6 @@ CREATE TABLE `005_omgss_cart` (
   `prdid` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `quantity` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `005_omgss_cart`
---
-
-INSERT INTO `005_omgss_cart` (`id`, `userid`, `ip`, `prdid`, `quantity`) VALUES
-(58, '2', '157.34.100.199', '19', '1');
 
 -- --------------------------------------------------------
 
@@ -218,22 +175,6 @@ CREATE TABLE `005_omgss_complaints` (
   `countnotify` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'No'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `005_omgss_complaints`
---
-
-INSERT INTO `005_omgss_complaints` (`id`, `userid`, `deviceid`, `complaint`, `status`, `notify`, `countnotify`) VALUES
-(1, '1', '4', 'sdgsfhgdfhjgkgjkhkljkl', 'Processing', 'Yes', 'Yes'),
-(2, '1', '43', 'fgfgfgfgfgfgfg', 'Processing', 'Yes', 'Yes'),
-(3, '3', '5', 'qwertyuiop', 'Processing', 'Yes', 'Yes'),
-(4, '3', '5', 'zxcvbnmlkjhgfdsaqwertyuiop', 'Processing', 'Yes', 'Yes'),
-(5, '2', '7', 'Not Working', 'Processing', 'Yes', 'Yes'),
-(6, '5', '8', 'cevrber', 'Processing', 'Yes', 'Yes'),
-(7, '1', '4', 'kjgjhgj', 'Processing', 'Yes', 'Yes'),
-(8, '1', '3', 'sddsd', 'Processing', 'Yes', 'Yes'),
-(9, '2', '18', 'Water Dripping', 'Processing', 'Yes', 'Yes'),
-(10, '2', '7', 'Light Fuse', 'Processing', 'Yes', 'Yes');
-
 -- --------------------------------------------------------
 
 --
@@ -270,14 +211,6 @@ CREATE TABLE `005_omgss_coupons` (
   `couponamount` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `usageperuser` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `005_omgss_coupons`
---
-
-INSERT INTO `005_omgss_coupons` (`id`, `couponname`, `couponcode`, `coupontype`, `couponamount`, `usageperuser`) VALUES
-(1, 'test', 'tr3445111', '1', '20', '2'),
-(2, 'test2', 'tr3445111sss', '2', '10', '5');
 
 -- --------------------------------------------------------
 
@@ -345,14 +278,6 @@ CREATE TABLE `005_omgss_notifications` (
   `datetime` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `005_omgss_notifications`
---
-
-INSERT INTO `005_omgss_notifications` (`id`, `image`, `description`, `datetime`) VALUES
-(1, '4a22340f43e26b69409aa29fe5c94366.jpg', '<p>Hi People, We are delighted to announce the launch of Our New Vehicle Maintenance Service</p>\r\n', '2020-07-20 08:58:39'),
-(2, '23b889b5d26b96c6b8669c1579b53163.jpg', '<p>Hey There</p>\r\n', '2020-08-09 13:48:27');
-
 -- --------------------------------------------------------
 
 --
@@ -381,49 +306,6 @@ CREATE TABLE `005_omgss_orders` (
   `datetime` datetime NOT NULL DEFAULT current_timestamp(),
   `datetimeind` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `005_omgss_orders`
---
-
-INSERT INTO `005_omgss_orders` (`id`, `userid`, `orderdetails`, `fullname`, `email`, `address`, `city`, `state`, `zip`, `paymenttype`, `totalordervalue`, `discount`, `status`, `orderstate`, `razorpayid`, `couponcode`, `coupondetails`, `refundid`, `datetime`, `datetimeind`) VALUES
-(1, '3', '{\"1\":{\"productid\":\"1\",\"saleprice\":\"365.00\",\"quantity\":\"1\"}}', 'Navi', 'navii.singh01@gmail.com', 'H-78, Shakarpur', 'New Delhi', 'Delhi', '110092', 'cos', '430.7', NULL, 'Success', 'Cancelled', '', '', '', NULL, '2020-07-29 14:52:31', '2020-07-29 02:52:31pm'),
-(2, '3', '{\"1\":{\"productid\":\"1\",\"saleprice\":\"365.00\",\"quantity\":\"1\"},\"2\":{\"productid\":\"18\",\"saleprice\":\"400.00\",\"quantity\":\"1\"}}', 'Navi', 'navii.singh01@gmail.com', 'H-78, Shakarpur', 'New Delhi', 'Delhi', '110092', 'cos', '902.7', NULL, 'Success', 'Cancelled', '', '', '', NULL, '2020-07-29 15:14:40', '2020-07-29 03:14:40pm'),
-(3, '3', '{\"1\":{\"productid\":\"33\",\"saleprice\":\"600.00\",\"quantity\":\"1\"},\"2\":{\"productid\":\"30\",\"saleprice\":\"500.00\",\"quantity\":\"1\"}}', 'Navi', 'navii.singh01@gmail.com', 'H-78, Shakarpur', 'New Delhi', 'Delhi', '110092', 'cos', '1298.0', NULL, 'Success', 'Received', '', '', '', NULL, '2020-07-29 15:28:23', '2020-07-29 03:28:23pm'),
-(4, '3', '{\"1\":{\"productid\":\"1\",\"saleprice\":\"365.00\",\"quantity\":\"1\"}}', 'Navi', 'navii.singh01@gmail.com', 'H-78, Shakarpur', 'New Delhi', 'Delhi', '110092', 'cos', '420.7', NULL, 'Success', 'Received', '', '2', '{\"id\":\"2\",\"couponname\":\"test2\",\"couponcode\":\"tr3445111sss\",\"coupontype\":2,\"couponamount\":\"10.00\",\"usageperuser\":\"5\"}', NULL, '2020-07-29 16:14:27', '2020-07-29 04:14:27pm'),
-(5, '3', '{\"1\":{\"productid\":\"1\",\"saleprice\":\"365.00\",\"quantity\":\"1\"}}', 'Navjot', 'navii.singh01@gmail.com', 'H-78', 'New Delhi', 'Delhi', '110092', 'cos', '430.7', NULL, 'Success', 'Cancelled', '', '', '', NULL, '2020-07-29 16:30:39', '2020-07-29 04:30:39pm'),
-(6, '2', '{\"1\":{\"productid\":\"18\",\"saleprice\":\"400.00\",\"quantity\":\"1\"},\"2\":{\"productid\":\"1\",\"saleprice\":\"365.00\",\"quantity\":\"1\"}}', 'ASHISH DIXIT', 'ashishdixit117@gmail.com', '35/16, Behind Chitrakot Parisar,Harshit Nagar', 'Raipur', 'Chhattisgarh', '492099', 'prep', '902.7', NULL, 'Success', 'Received', 'pay_FKZo85nqwNGgfm', '', '', NULL, '2020-07-30 04:33:29', '2020-07-30 04:33:29am'),
-(7, '2', '{\"1\":{\"productid\":\"1\",\"saleprice\":\"365.00\",\"quantity\":\"1\"}}', 'ASHISH DIXIT', 'ashishdixit117@gmail.com', '35/16, Behind Chitrakot Parisar,Harshit Nagar', 'Raipur', 'Chhattisgarh', '492099', 'cos', '430.7', NULL, 'Success', 'Received', '', '', '', NULL, '2020-07-30 04:49:12', '2020-07-30 04:49:12am'),
-(8, '1', '{\"1\":{\"productid\":\"27\",\"saleprice\":\"365\",\"quantity\":\"1\"},\"2\":{\"productid\":\"30\",\"saleprice\":\"500\",\"quantity\":\"1\"}}', 'saurabh manna', 'saurabhmanna2010@gmail.com', 'rterter1111', '', '', '', 'prep', '1020.7', NULL, 'Failed', 'Received', NULL, '', 'null', NULL, '2020-07-31 23:51:04', '2020-08-01 05:21:04am'),
-(9, '1', '{\"1\":{\"productid\":\"27\",\"saleprice\":\"365\",\"quantity\":\"1\"},\"2\":{\"productid\":\"30\",\"saleprice\":\"500\",\"quantity\":\"1\"}}', 'saurabh manna', 'saurabhmanna2010@gmail.com', 'rterter1111', '', '', '', 'prep', '1020.7', NULL, 'Failed', 'Received', NULL, '', 'null', NULL, '2020-07-31 23:51:24', '2020-08-01 05:21:24am'),
-(10, '3', '{\"1\":{\"productid\":\"1\",\"saleprice\":\"365.00\",\"quantity\":\"1\"}}', 'Navjot', 'navii.singh01@gmail.com', 'H-78', 'New Delhi', 'Delhi', '110092', 'cos', '430.7', NULL, 'Success', 'Delivered', '', '', '', NULL, '2020-08-08 07:45:35', '2020-08-08 07:45:35am'),
-(11, '3', '{\"1\":{\"productid\":\"1\",\"saleprice\":\"365.00\",\"quantity\":\"1\"}}', 'Navjot', 'navii.singh01@gmail.com', 'H-78', 'New Delhi', 'Delhi', '110092', 'prep', '430.70', NULL, 'Success', 'Received', 'pay_FOMvKeBih0c9Tc', '', '', NULL, '2020-08-08 18:34:30', '2020-08-08 06:34:30pm'),
-(12, '3', '{\"1\":{\"productid\":\"22\",\"saleprice\":\"400.00\",\"quantity\":\"1\"}}', 'Navjot', 'navii.singh01@gmail.com', 'H-78', 'New Delhi', 'Delhi', '110092', 'prep', '472.00', NULL, 'Success', 'Received', 'pay_FONnio4F86rVPJ', '', '', NULL, '2020-08-08 19:24:46', '2020-08-08 07:24:46pm'),
-(13, '2', '{\"1\":{\"productid\":\"2\",\"saleprice\":\"365.00\",\"quantity\":\"1\"}}', 'ASHISH DIXIT', 'ashishdixit117@gmail.com', '35/16, Behind Chitrakot Parisar,Harshit Nagar', 'Raipur', 'Chhattisgarh', '492099', 'prep', '430.70', NULL, 'Success', 'Received', 'pay_FOfCeMdhgvpkE2', '', '', NULL, '2020-08-09 12:26:17', '2020-08-09 12:26:17pm'),
-(14, '3', '{\"1\":{\"productid\":\"30\",\"saleprice\":\"500.00\",\"quantity\":\"1\"}}', 'Navjot', 'navii.singh01@gmail.com', 'H-78', 'New Delhi', 'Delhi', '110092', 'cos', '590.00', NULL, 'Success', 'Delivered', '', '', '', NULL, '2020-08-09 13:05:11', '2020-08-09 01:05:11pm'),
-(15, '2', '{\"1\":{\"productid\":\"21\",\"saleprice\":\"365.00\",\"quantity\":\"1\"}}', 'ASHISH DIXIT', 'ashishdixit117@gmail.com', '35/16, Behind Chitrakot Parisar,Harshit Nagar', 'Raipur', 'Chhattisgarh', '492099', 'prep', '430.70', NULL, 'Success', 'Delivered', 'pay_FOgJkIW5y0XCwa', '', '', NULL, '2020-08-09 13:31:50', '2020-08-09 01:31:50pm'),
-(16, '5', '{\"1\":{\"productid\":\"32\",\"saleprice\":\"400.00\",\"quantity\":\"1\"}}', 'Abhishek Kumar Sinha', 'aks.jan20@gmail.com', 'B/3-7/A Dhebar City Bhatagaon', 'Raipur', 'Chhattisgarh', '492001', 'cos', '472.00', NULL, 'Success', 'Delivered', '', '', '', NULL, '2020-08-10 09:17:54', '2020-08-10 09:17:54am'),
-(17, '5', '{\"1\":{\"productid\":\"32\",\"saleprice\":\"400.00\",\"quantity\":\"1\"}}', 'Abhishek Kumar Sinha', 'aks.jan20@gmail.com', 'B/3-7/A Dhebar City Bhatagaon', 'Raipur', 'Chhattisgarh', '492001', 'cos', '472.00', NULL, 'Success', 'Delivered', '', '', '', NULL, '2020-08-10 09:27:24', '2020-08-10 09:27:24am'),
-(18, '3', '{\"1\":{\"productid\":\"2\",\"saleprice\":\"365.00\",\"quantity\":\"1\"}}', 'Navjot', 'navii.singh01@gmail.com', 'H-78', 'New Delhi', 'Delhi', '110092', 'cos', '430.70', NULL, 'Success', 'Received', '', '', '', NULL, '2020-08-12 13:34:37', '2020-08-12 01:34:37pm'),
-(19, '1', '{\"1\":{\"productid\":\"2\",\"saleprice\":\"365\",\"quantity\":\"1\"},\"2\":{\"productid\":\"5\",\"saleprice\":\"1500\",\"quantity\":\"1\"}}', 'saurabh manna', 'saurabhmanna2010@gmail.com', 'rterter1111', '', '', '', 'cos', '2200.7', NULL, 'Success', 'Received', NULL, '', 'null', NULL, '2020-08-16 17:03:01', '2020-08-16 10:33:01pm'),
-(20, '3', '{\"1\":{\"productid\":\"46\",\"saleprice\":\"200.00\",\"quantity\":\"1\"}}', 'Navjot', 'navii.singh01@gmail.com', 'H-78', 'New Delhi', 'Delhi', '110092', 'cos', '236.00', NULL, 'Success', 'Received', '', '', '', NULL, '2020-08-16 19:13:56', '2020-08-16 07:13:56pm'),
-(21, '1', '{\"1\":{\"productid\":\"2\",\"saleprice\":\"365\",\"quantity\":\"1\"}}', 'saurabh manna', 'saurabhmanna2010@gmail.com', 'rterter1111', '', '', '', 'cos', '430.7', NULL, 'Success', 'Received', NULL, '', 'null', NULL, '2020-08-17 22:04:58', '2020-08-18 03:34:58am'),
-(22, '1', '{\"1\":{\"productid\":\"19\",\"saleprice\":\"365\",\"quantity\":\"1\"}}', 'saurabh manna', 'saurabhmanna2010@gmail.com', 'rterter1111', '', '', '', 'cos', '430.7', NULL, 'Success', 'Received', NULL, '', 'null', NULL, '2020-08-17 22:13:50', '2020-08-18 03:43:50am'),
-(23, '1', '{\"1\":{\"productid\":\"2\",\"saleprice\":\"365\",\"quantity\":\"1\"}}', 'saurabh manna', 'saurabhmanna2010@gmail.com', 'rterter1111', '', '', '', 'cos', '430.7', NULL, 'Success', 'Received', NULL, '', 'null', NULL, '2020-08-17 22:31:06', '2020-08-18 04:01:06am'),
-(24, '1', '{\"1\":{\"productid\":\"2\",\"saleprice\":\"365\",\"quantity\":\"1\"}}', 'saurabh manna', 'saurabhmanna2010@gmail.com', 'rterter1111', '', '', '', 'cos', '430.7', NULL, 'Success', 'Received', NULL, '', 'null', NULL, '2020-08-17 22:46:03', '2020-08-18 04:16:03am'),
-(25, '1', '{\"1\":{\"productid\":\"2\",\"saleprice\":\"365\",\"quantity\":\"1\"}}', 'saurabh manna', 'saurabhmanna2010@gmail.com', 'rterter1111', '', '', '', 'cos', '430.7', NULL, 'Success', 'Received', NULL, '', 'null', NULL, '2020-08-17 22:47:43', '2020-08-18 04:17:43am'),
-(26, '1', '{\"1\":{\"productid\":\"1\",\"saleprice\":\"365.00\",\"quantity\":\"1\"},\"2\":{\"productid\":\"2\",\"saleprice\":\"365.00\",\"quantity\":\"1\"}}', 'asdadff1111', 'saurabhmanna2010@gmail.com', 'rterter1111', 'adsdas1111', 'asdasd1111', 'sxsxsx111', 'cos', '861.40', NULL, 'Success', 'Received', '', '', '', NULL, '2020-08-18 13:54:16', '2020-08-18 01:54:16pm'),
-(27, '1', '{\"1\":{\"productid\":\"2\",\"saleprice\":\"365.00\",\"quantity\":\"1\"}}', 'asdadff1111', 'saurabhmanna2010@gmail.com', 'rterter1111', 'adsdas1111', 'asdasd1111', 'sxsxsx111', 'cos', '430.70', NULL, 'Success', 'Received', '', '', '', NULL, '2020-08-18 13:54:54', '2020-08-18 01:54:54pm'),
-(28, '1', '{\"1\":{\"productid\":\"2\",\"saleprice\":\"365\",\"quantity\":\"1\"}}', 'saurabh manna', 'saurabhmanna2010@gmail.com', 'rterter1111', '', '', '', 'cos', '430.7', NULL, 'Success', 'Received', NULL, '', 'null', NULL, '2020-08-18 15:32:04', '2020-08-18 09:02:04pm'),
-(29, '1', '{\"1\":{\"productid\":\"1\",\"saleprice\":\"365.00\",\"quantity\":\"1\"}}', 'asdadff1111', 'saurabhmanna2010@gmail.com', 'rterter1111', 'adsdas1111', 'asdasd1111', 'sxsxsx111', 'cos', '430.70', NULL, 'Success', 'Delivered', '', '', '', NULL, '2020-08-18 15:33:04', '2020-08-18 03:33:04pm'),
-(30, '3', '{\"1\":{\"productid\":\"57\",\"saleprice\":\"250.00\",\"quantity\":\"1\"}}', 'Navjot', 'navii.singh01@gmail.com', 'H-78', 'New Delhi', 'Delhi', '110092', 'cos', '295.00', NULL, 'Success', 'Processing', '', '', '', NULL, '2020-08-18 15:46:29', '2020-08-18 03:46:29pm'),
-(31, '3', '{\"1\":{\"productid\":\"2\",\"saleprice\":\"365.00\",\"quantity\":\"1\"},\"2\":{\"productid\":\"1\",\"saleprice\":\"365.00\",\"quantity\":\"1\"}}', 'Navjot', 'navii.singh01@gmail.com', 'H-78', 'New Delhi', 'Delhi', '110092', 'cos', '861.40', NULL, 'Success', 'Delivered', '', '', '', NULL, '2020-08-18 15:49:27', '2020-08-18 03:49:27pm'),
-(32, '3', '{\"1\":{\"productid\":\"18\",\"saleprice\":\"400.00\",\"quantity\":\"1\"}}', 'Navjot', 'navii.singh01@gmail.com', 'H-78', 'New Delhi', 'Delhi', '110092', 'cos', '472.00', NULL, 'Success', 'Processing', '', '', '', NULL, '2020-08-18 15:52:47', '2020-08-18 03:52:47pm'),
-(33, '3', '{\"1\":{\"productid\":\"70\",\"saleprice\":\"200.00\",\"quantity\":\"1\"}}', 'Navjot', 'navii.singh01@gmail.com', 'H-78', 'New Delhi', 'Delhi', '110092', 'cos', '236.00', NULL, 'Success', 'Delivered', '', '', '', NULL, '2020-08-18 16:13:30', '2020-08-18 04:13:30pm'),
-(34, '5', '{\"1\":{\"productid\":\"22\",\"saleprice\":\"400.00\",\"quantity\":\"1\"}}', 'Abhishek Kumar Sinha', 'aks.jan20@gmail.com', 'B/3-7/A Dhebar City Bhatagaon', 'Raipur', 'Chhattisgarh', '492001', 'cos', '472.00', NULL, 'Success', 'Received', '', '', '', NULL, '2020-08-18 17:55:18', '2020-08-18 05:55:18pm'),
-(35, '1', '{\"1\":{\"productid\":\"2\",\"saleprice\":\"365.00\",\"quantity\":\"2\"}}', 'asdadff1111', 'saurabhmanna2010@gmail.com', 'rterter1111', 'adsdas1111', 'asdasd1111', 'sxsxsx111', 'cos', '861.40', NULL, 'Success', 'Delivered', '', '', '', NULL, '2020-08-18 21:00:29', '2020-08-18 09:00:29pm'),
-(36, '2', '{\"1\":{\"productid\":\"2\",\"saleprice\":\"365.00\",\"quantity\":\"1\"}}', 'ASHISH DIXIT', 'ashishdixit117@gmail.com', '35/16, Behind Chitrakot Parisar,Harshit Nagar', 'Raipur', 'Chhattisgarh', '492099', 'prep', '430.70', NULL, 'Success', 'Delivered', 'pay_FSVYafkyVEpIQU', '', '', NULL, '2020-08-19 05:36:17', '2020-08-19 05:36:17am'),
-(37, '1', '{\"1\":{\"productid\":\"20\",\"saleprice\":\"400.00\",\"quantity\":\"1\"}}', 'asdadff1111', 'saurabhmanna2010@gmail.com', 'rterter1111', 'adsdas1111', 'asdasd1111', 'sxsxsx111', 'cos', '472.00', NULL, 'Success', 'Received', '', '', '', NULL, '2020-08-19 15:33:04', '2020-08-19 03:33:04pm');
 
 -- --------------------------------------------------------
 
@@ -644,47 +526,6 @@ CREATE TABLE `005_omgss_usernotifications` (
   `datetime` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `005_omgss_usernotifications`
---
-
-INSERT INTO `005_omgss_usernotifications` (`id`, `userid`, `notificationid`, `image`, `content`, `readstatus`, `androidnotification`, `datetime`) VALUES
-(1, '3', 'system', 'pass.png', 'Your Order OMGORD32 has been marked Processing', 'read', 'Yes', '2020-08-21 12:09:04'),
-(2, '3', 'system', 'pass.png', 'Your Order OMGORD32 has been marked Processing', 'read', 'Yes', '2020-08-21 12:09:04'),
-(3, '3', 'system', 'pass.png', 'Product Fully Automatic Washing Machine - Annual Maintenance from Order OMGORD32 has been added to annual maintenance. Please check My Devices', 'read', 'Yes', '2020-08-21 12:09:04'),
-(4, '3', 'system', 'pass.png', 'Your Order OMGORD32 has been marked Delivered. Thank You for shopping with Us.', 'read', 'Yes', '2020-08-21 12:09:04'),
-(5, '1', 'system', 'pass.png', 'Your Order OMGORD29 has been marked Processing', 'read', 'Yes', '2020-08-21 12:09:04'),
-(6, '3', 'system', 'pass.png', 'Your Order OMGORD32 has been marked Processing', 'read', 'Yes', '2020-08-21 12:09:04'),
-(7, '3', 'system', 'pass.png', 'Your Order OMGORD31 has been marked Processing', 'read', 'Yes', '2020-08-21 12:09:04'),
-(8, '3', 'system', 'pass.png', 'Your Order OMGORD32 has been marked Processing', 'read', 'Yes', '2020-08-21 12:09:04'),
-(9, '1', 'system', 'pass.png', 'Product Split AC - Annual Maintenance from Order OMGORD29 has been added to annual maintenance. Please check My Devices', 'read', 'Yes', '2020-08-21 12:09:04'),
-(10, '1', 'system', 'pass.png', 'Your Order OMGORD29 has been marked Delivered. Thank You for shopping with Us.', 'read', 'Yes', '2020-08-21 12:09:04'),
-(11, '1', 'system', 'pass.png', 'Your Order OMGORD29 has been marked Processing', 'read', 'Yes', '2020-08-21 12:09:04'),
-(12, '3', 'system', 'pass.png', 'Your Order OMGORD33 has been received by us', 'read', 'Yes', '2020-08-21 12:09:04'),
-(13, '3', 'system', 'pass.png', 'Product Window AC - Annual Maintenance from Order OMGORD31 has been added to annual maintenance. Please check My Devices', 'read', 'Yes', '2020-08-21 12:09:04'),
-(14, '3', 'system', 'pass.png', 'Product Split AC - Annual Maintenance from Order OMGORD31 has been added to annual maintenance. Please check My Devices', 'read', 'Yes', '2020-08-21 12:09:04'),
-(15, '3', 'system', 'pass.png', 'Your Order OMGORD31 has been marked Delivered. Thank You for shopping with Us.', 'read', 'Yes', '2020-08-21 12:09:04'),
-(16, '1', 'system', 'pass.png', 'Product Split AC - Annual Maintenance from Order OMGORD29 has been added to annual maintenance. Please check My Devices', 'read', 'Yes', '2020-08-21 12:09:04'),
-(17, '1', 'system', 'pass.png', 'Your Order OMGORD29 has been marked Delivered. Thank You for shopping with Us.', 'read', 'Yes', '2020-08-21 12:09:04'),
-(18, '3', 'system', 'pass.png', 'Your Order OMGORD32 has been marked Processing', 'read', 'Yes', '2020-08-21 12:09:04'),
-(19, '3', 'system', 'pass.png', 'Your Order OMGORD33 has been marked Processing', 'read', 'Yes', '2020-08-21 12:09:04'),
-(20, '3', 'system', 'pass.png', 'Your Order OMGORD33 has been marked Processing', 'read', 'Yes', '2020-08-21 12:09:04'),
-(21, '3', 'system', 'pass.png', 'Your Order OMGORD33 has been marked Processing', 'read', 'Yes', '2020-08-21 12:09:04'),
-(22, '3', 'system', 'pass.png', 'Your Order OMGORD33 has been marked Processing', 'read', 'Yes', '2020-08-21 12:09:04'),
-(23, '3', 'system', 'pass.png', 'Your Order OMGORD33 has been marked Processing', 'read', 'Yes', '2020-08-21 12:09:04'),
-(24, '3', 'system', 'pass.png', 'Your Order OMGORD33 has been marked Processing', 'read', 'Yes', '2020-08-21 12:09:04'),
-(25, '3', 'system', 'pass.png', 'Your Order OMGORD33 has been marked Processing', 'read', 'Yes', '2020-08-21 12:09:04'),
-(26, '3', 'system', 'pass.png', 'Your Order OMGORD33 has been marked Processing', 'read', 'Yes', '2020-08-21 12:09:04'),
-(27, '3', 'system', 'pass.png', 'Your Order OMGORD33 has been marked Delivered. Thank You for shopping with Us.', 'read', 'Yes', '2020-08-21 12:09:04'),
-(28, '5', 'system', 'pass.png', 'Your Order OMGORD34 has been received by us', 'unread', 'Yes', '2020-08-21 12:09:04'),
-(29, '1', 'system', 'pass.png', 'Your Order OMGORD35 has been received by us', 'read', 'Yes', '2020-08-21 12:09:04'),
-(30, '2', 'system', 'pass.png', 'Your Order OMGORD36 has been received by us', 'read', 'Yes', '2020-08-21 12:09:04'),
-(31, '2', 'system', 'pass.png', 'Product Window AC - Annual Maintenance from Order OMGORD36 has been added to annual maintenance. Please check My Devices', 'read', 'Yes', '2020-08-21 12:09:04'),
-(32, '2', 'system', 'pass.png', 'Your Order OMGORD36 has been marked Delivered. Thank You for shopping with Us.', 'read', 'Yes', '2020-08-21 12:09:04'),
-(33, '1', 'system', 'pass.png', 'Product Window AC - Annual Maintenance from Order OMGORD35 has been added to annual maintenance. Please check My Devices', 'unread', 'Yes', '2020-08-21 12:09:04'),
-(34, '1', 'system', 'pass.png', 'Your Order OMGORD35 has been marked Delivered. Thank You for shopping with Us.', 'unread', 'Yes', '2020-08-21 12:09:04'),
-(35, '1', 'system', 'pass.png', 'Your Order OMGORD37 has been received by us', 'unread', 'Yes', '2020-08-21 12:09:04');
-
 -- --------------------------------------------------------
 
 --
@@ -704,19 +545,6 @@ CREATE TABLE `005_omgss_users` (
   `datetime` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `005_omgss_users`
---
-
-INSERT INTO `005_omgss_users` (`id`, `eMail`, `pass`, `Name`, `Phone`, `Address`, `Location`, `deviceid`, `devicetoken`, `datetime`) VALUES
-(1, 'saurabhmanna2010@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'saurabh manna', '123456', 'rterter1111', 'adsdas1111', '25sss', '1324234234ssss', '2020-07-20 09:17:49'),
-(2, 'ashishdixit117@gmail.com', 'fe01230214b3ae3031206d630cf64e3a', 'Ashish Dixit', '8770772802', '35/16, First Row, Behind Chitrakot Parisar, Harshit Nagar, Tatibandh', 'Harshit Nagar', '543de88b1808b72e', 'd_iIgbV7QyOvAFEpQB8fi8:APA91bFkVB5L7CvjleMhR5HaSqRaEGYaGWJI3ue1aqb0VVatazaQ4BC-V40COciQxLr1z7mBfB7sd1al47HCF8aTP1tLGIdzqSqk1fGceoxfKJuTHImLGelHjrHcopNY5YDyy4DhCSEB', '2020-07-20 11:05:57'),
-(3, 'navii.singh01@gmail.com', '25d55ad283aa400af464c76d713c07ad', 'Navjot Singh', '8826016287', ' ', ' ', '31c52e336150ee95', 'egtE0WGyS6eh97rjlS0Lb0:APA91bFiXZ9n49FFeBHBWbHxkRqwrKhS6jvoQpkg2bMSfEdklpW2d1CIrQaZmAB_Q4NfOPow_SzuwsBNfeczgBs3T2dyXRZ1tI5nSSkxm04HvFfzfEC9x-LQ6OBhrCKjYpK-Et1NG4Cb', '2020-07-20 18:10:06'),
-(4, 'krupinder95@gmail.com', '25d55ad283aa400af464c76d713c07ad', 'Rupinder Kaur', '8527646078', 'C-14B Pandav Nagar', 'Delhi', NULL, NULL, '2020-07-25 22:08:35'),
-(5, 'aks.jan20@gmail.com', '7a9f0604aa832e53488ba56c1cce5a4e', 'Abhishek  Sinha ', '9776183889', 'b/3-7/A Dhebar City Bhatagaon,  Raipur 492001', '', '6c7fc2a123a6adda', 'eUUsRgbCTiauVA1BDCxIuu:APA91bH0--rlNvAIP9YYVM1Dotur-KG7xazpmX8y09Qlg5mwyb4QvTQWXlZTn1F55z5w28KgLtJtMXXuubJn6gFbUg23TZI_9JJNyEXZJv5fmuKYqan6mosSicz0zUHTlmkIE_lAbc5B', '2020-08-10 09:07:23'),
-(6, 'rashmikaur0212@gmail.com', 'dad6bc6306320935af6cb5f9fed96222', 'rashmi sachdeva', '8269813328', 'shrinagar', 'raipur', 'fcacd1e4dc607d9b', 'e1ygu2VrTJuiAIVVvezIBh:APA91bHyK3PdjVD9l7R0-nl6SW-qzVc7IqZq5W16YW8GKcjTyKES0CN8bQExH38rlmBHD-z-vBKZk13hcR5ASRjv3L-0Qm0w58PrAM5OqH04tWc3s4KmT0_yyMe63NJOa7JNZFfgGK16', '2020-08-19 06:01:34'),
-(7, 'juliagaskoin95@yandex.ru', '358d919c47622d24607dceb751293616', 'bernaldinobest https://wikipedia.org 1157801', 'juliagaskoin95@yandex.ru', 'bernaldinobest https://wikipedia.org', 'Р РѕСЃСЃРёСЏ', NULL, NULL, '2020-08-21 09:15:53');
-
 -- --------------------------------------------------------
 
 --
@@ -732,22 +560,6 @@ CREATE TABLE `005_omgss_wishlist` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `005_omgss_wishlist`
---
-
-INSERT INTO `005_omgss_wishlist` (`id`, `userid`, `ip`, `prdid`, `quantity`) VALUES
-(7, '', '42.109.252.58', '79', '1'),
-(28, '4', '1.23.236.250', '1', '1'),
-(50, '', '1.23.108.152', '17', '1'),
-(51, '1', '42.109.228.19', '1', '1'),
-(52, '1', '42.109.228.19', '18', '1'),
-(53, '1', '42.109.228.19', '7', '1'),
-(54, '1', '42.109.228.19', '9', '1'),
-(59, '3', '116.74.18.63', '1', '1'),
-(60, '1', '223.233.58.23', '2', '1'),
-(61, '1', '223.233.58.23', '19', '1');
-
---
 -- Indexes for dumped tables
 --
 
@@ -755,7 +567,7 @@ INSERT INTO `005_omgss_wishlist` (`id`, `userid`, `ip`, `prdid`, `quantity`) VAL
 -- Indexes for table `003_omgss_api_tokens`
 --
 ALTER TABLE `003_omgss_api_tokens`
-  ADD PRIMARY KEY (`id`);
+  ADD UNIQUE KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `003_omgss_devices`
@@ -900,12 +712,6 @@ ALTER TABLE `005_omgss_wishlist`
 --
 
 --
--- AUTO_INCREMENT for table `003_omgss_api_tokens`
---
-ALTER TABLE `003_omgss_api_tokens`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
 -- AUTO_INCREMENT for table `003_omgss_devices`
 --
 ALTER TABLE `003_omgss_devices`
@@ -933,7 +739,7 @@ ALTER TABLE `005_omgss_billingaddresses`
 -- AUTO_INCREMENT for table `005_omgss_cart`
 --
 ALTER TABLE `005_omgss_cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT for table `005_omgss_categories`
@@ -1035,7 +841,7 @@ ALTER TABLE `005_omgss_usernotifications`
 -- AUTO_INCREMENT for table `005_omgss_users`
 --
 ALTER TABLE `005_omgss_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `005_omgss_wishlist`
