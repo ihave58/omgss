@@ -1,1 +1,7 @@
 Header set X-Robots-Tag "noindex, noarchive, nosnippet"
+# DO NOT REMOVE THIS LINE AND THE LINES BELLOW SSL_REDIRECT:omgss.in
+RewriteEngine on
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP_HOST} (www\.)?omgss.in
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# DO NOT REMOVE THIS LINE AND THE LINES BELLOW SSL_REDIRECT:omgss.in

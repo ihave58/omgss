@@ -13,14 +13,14 @@
         $urlid = runUserInputSanitizationHook($_POST['appid']);
         $urltoken = runUserInputSanitizationHook($_POST['token']);
 
-        $sql1 = "SELECT id FROM 003_omgss_api_tokens WHERE app_id='" . $urlid . "' AND app_token='" . $urltoken . "'";
+        $sql1 = "SELECT user_id FROM 003_omgss_api_tokens WHERE app_id='" . $urlid . "' AND app_token='" . $urltoken . "'";
         $results = mysqli_query($conn, $sql1);
         $rowcount = mysqli_num_rows($results);
+
         if ($rowcount > 0) {
             $Data = mysqli_fetch_assoc($results);
-            $UserId = $Data['id'];
+            $UserId = $Data['user_id'];
         }
-
     }
 
     if (empty($UserId)) {

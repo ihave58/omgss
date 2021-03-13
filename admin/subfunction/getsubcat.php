@@ -1,8 +1,7 @@
 <?php
-    require("../../include/utils.php");
-    
     session_start();
     include('../../include/db.php');
+    require("../../include/utils.php");
     error_reporting(0);
 
     if (isset($_POST['action']) && runUserInputSanitizationHook($_POST['action']) == 'query4') {
@@ -14,8 +13,5 @@
         while ($rowsubcats = mysqli_fetch_assoc($ressubcats)) {
             echo '<option value="' . $rowsubcats['id'] . '">' . $rowsubcats['subcatname'] . '</option>';
         }
-
-
     }
-
 ?>
