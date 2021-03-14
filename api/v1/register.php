@@ -6,32 +6,8 @@
         echo $response = json_encode(array('status' => 'error', 'message' => "Appid Can't be Empty"));
         exit;
     }
-    if (empty($_POST['token'])) {
-        echo $response = json_encode(array('status' => 'error', 'message' => "Token Can't be Empty"));
-        exit;
-    } else {
-        $urlid = runUserInputSanitizationHook($_POST['appid']);
-        $urltoken = runUserInputSanitizationHook($_POST['token']);
-
-        $sql1 = "SELECT user_id FROM 003_omgss_api_tokens WHERE app_id='" . $urlid . "' AND app_token='" . $urltoken . "'";
-        $results = mysqli_query($conn, $sql1);
-        $rowcount = mysqli_num_rows($results);
-        if ($rowcount > 0) {
-            $Data = mysqli_fetch_assoc($results);
-            $UserId = $Data['user_id'];
-        }
-
-    }
-
-    if (empty($UserId)) {
-        $response = array('status' => 'error', 'message' => 'Invalid appid or token');
-        echo json_encode($response);
-        exit;
-    }
-
-    $method = $_SERVER['REQUEST_METHOD'];
-
-    if ($method == 'POST') {
+    
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $eMail = (isset($_POST['eMail'])) ? runUserInputSanitizationHook($_POST['eMail']) : '';
         $pass = (isset($_POST['pass'])) ? runUserInputSanitizationHook($_POST['pass']) : '';
         $fname = (isset($_POST['fname'])) ? runUserInputSanitizationHook($_POST['fname']) : '';
@@ -64,83 +40,45 @@
             $message = '<table border="0" cellpadding="0" cellspacing="10" height="100%" bgcolor="#FFFFFF" width="100%" style="max-width: 650px;" id="bodyTable">
 
           <tr>
-
               <td align="center" valign="top">
-
                   <table border="0" cellpadding="0" cellspacing="0" width="100%" id="emailContainer" style="font-family:Arial; color: #333333;">
-
                       <!-- Logo -->
-
                       <tr>
-
                           <td align="left" valign="top" colspan="2" style="border-bottom: 1px solid #CCCCCC; padding-bottom: 10px;">
-
                               <img border="0" src="http://omgss.in/images/logo.png" title="Home" class="sitelogo" width="60%" style="max-width:250px;" />
-
                           </td>
-
                       </tr>
-
                       <!-- Title -->
-
                       <tr>
-
                           <td align="left" valign="top" colspan="2" style="border-bottom: 1px solid #CCCCCC; padding: 20px 0 10px 0;">
-
                               <span style="font-size: 18px; font-weight: normal;">Thanks for Registering With Us.</span>
-
                           </td>
-
                       </tr>
-
                       <!-- Messages -->
-
                       <tr>
-
                           <td align="left" valign="top" colspan="2" style="padding-top: 10px;">
-
                               <span style="font-size: 12px; line-height: 1; color: #333333;">
-
                                   Your Username is <b>' . $eMail . '</b>
-
                                   <br /><br />
-
                                   Your Password is <b>' . $passe . '</b>
-
                                   <br /><br />
-
                                   For any queries you can contact us at http://www.omgss.in/contact.php
-
                               </span>
-
                           </td>
-
                       </tr>
                        <tr>
-
                           <td align="left" valign="top" colspan="2" style="border-bottom: 1px solid #CCCCCC; padding: 20px 0 10px 0;">
-
                               <span style="font-size: 18px; font-weight: normal;"></span>
-
                           </td>
-
                       </tr>
                        <tr>
-
                           <td align="left" valign="top" colspan="2" style="border-bottom: 1px solid #CCCCCC; padding: 20px 0 10px 0;">
-
                               <span style="font-size: 18px; font-weight: normal;"></span>
-
                           </td>
-
                       </tr>
-
                   </table>
-
               </td>
-
           </tr>
-
       </table>';
 
             $to = $eMail;
