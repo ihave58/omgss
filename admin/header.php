@@ -30,7 +30,7 @@
     <link href="assets/css/custom-styles.css" rel="stylesheet"/>
     <link href="assets/css/style.css" rel="stylesheet"/>
     <!-- Google Fonts-->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
     <link rel="stylesheet" href="assets/js/Lightweight-Chart/cssCharts.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
@@ -83,13 +83,7 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    $(document).ready(function () {
-        // $(".notify-bar").show().addClass("notify-bar-height-change");
-    });
-</script>
-<script>
     function abc() {
-
         $('.notify-bar').show().addClass('notify-bar-height-change');
     }
 
@@ -148,28 +142,12 @@
 <div id="wrapper">
     <nav class="navbar navbar-default top-navbar" role="navigation">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle waves-effect waves-dark" data-toggle="collapse"
-                    data-target=".sidebar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
             <a class="navbar-brand waves-effect waves-dark" href="dashboard.php">
-                <div id="logoandcompany"><span> <strong>Omgss</strong></span></div>
+                <div id="logoandcompany">
+                    <strong>Omgss</strong>
+                </div>
             </a>
-
-            <div id="sideNav" href=""><i class="material-icons dp48">toc</i></div>
         </div>
-
-        <ul class="nav navbar-top-links navbar-right">
-            <!-- <li><a class="dropdown-button waves-effect waves-dark" href="#!" data-activates="dropdown4"><i class="fa fa-envelope fa-fw"></i> <i class="material-icons right">arrow_drop_down</i></a></li>
-            <li><a class="dropdown-button waves-effect waves-dark" href="#!" data-activates="dropdown3"><i class="fa fa-tasks fa-fw"></i> <i class="material-icons right">arrow_drop_down</i></a></li>
-            <li><a class="dropdown-button waves-effect waves-dark" href="#!" data-activates="dropdown2"><i class="fa fa-bell fa-fw"></i> <i class="material-icons right">arrow_drop_down</i></a></li> -->
-            <li><a class="dropdown-button waves-effect waves-dark" href="#!" data-activates="dropdown1"><i
-                            class="fa fa-user fa-fw"></i> <b><?php echo $_SESSION["sessionnameadmin"]; ?></b> <i
-                            class="material-icons right">arrow_drop_down</i></a></li>
-        </ul>
     </nav>
     <!-- Dropdown Structure -->
     <ul id="dropdown1" class="dropdown-content">

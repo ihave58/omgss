@@ -2,3 +2,10 @@
     border: 1px solid #ddd;
     margin-top: -20px;
 }
+
+#logoandcompany {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    padding-left: 10px;
+}
